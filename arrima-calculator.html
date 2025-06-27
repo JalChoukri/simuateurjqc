@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur Arrima Gratuit 2025 - Calculateur de Score Québec</title>
+    <meta name="description" content="Calculez votre score potentiel pour l'immigration au Québec avec notre simulateur Arrima gratuit 2025. Outil complet et précis.">
+    <link rel="stylesheet" href="arrima-calculator.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sticky Navigation Bar -->
+    <nav class="sticky-nav" id="sticky-nav">
+        <div class="nav-content">
+            <div class="nav-brand">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                    <line x1="8" y1="21" x2="16" y2="21"/>
+                    <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+                <span class="nav-title">Simulateur Arrima Gratuit 2025</span>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="nav-sections">
+                <button class="nav-btn" data-section="profil">
+                    <svg class="nav-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <span class="nav-btn-text">Profil</span>
+                </button>
+                <button class="nav-btn" data-section="french">
+                    <span style="font-size: 12px;">🇫🇷</span>
+                    <span class="nav-btn-text">Français</span>
+                </button>
+                <button class="nav-btn" data-section="english">
+                    <span style="font-size: 12px;">🇬🇧</span>
+                    <span class="nav-btn-text">Anglais</span>
+                </button>
+                <button class="nav-btn" data-section="quebec">
+                    <svg class="nav-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <span class="nav-btn-text">Québec</span>
+                </button>
+                <button class="nav-btn" data-section="autres">
+                    <svg class="nav-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    <span class="nav-btn-text">Autres</span>
+                </button>
+                <button class="nav-btn" data-section="results">
+                    <svg class="nav-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                    <span class="nav-btn-text">Résultat</span>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation Grid -->
+            <div class="mobile-navbar-grid">
+                <button class="mobile-nav-btn" data-section="profil">
+                    <svg style="width: 12px; height: 12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <span>Profil</span>
+                </button>
+                <button class="mobile-nav-btn" data-section="french">
+                    <span style="font-size: 12px;">🇫🇷</span>
+                    <span>Français</span>
+                </button>
+                <button class="mobile-nav-btn" data-section="english">
+                    <span style="font-size: 12px;">🇬🇧</span>
+                    <span>Anglais</span>
+                </button>
+                <button class="mobile-nav-btn" data-section="quebec">
+                    <svg style="width: 12px; height: 12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <span>Québec</span>
+                </button>
+                <button class="mobile-nav-btn" data-section="autres">
+                    <svg style="width: 12px; height: 12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    <span>Autres</span>
+                </button>
+                <button class="mobile-nav-btn" data-section="results">
+                    <svg style="width: 12px; height: 12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                    <span>Résultat</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="calculator-container">
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-brand">
+                    <img src="/images/jarrive-quebec-logo.png" alt="J'arrive Québec" class="logo">
+                    <div class="header-text">
+                        <h1 class="main-title">Simulateur Arrima Gratuit 2025</h1>
+                        <p class="brand-subtitle">Par J'arrive Québec</p>
+                    </div>
+                </div>
+                <p class="header-description">
+                    Calculez votre score potentiel pour l'immigration au Québec. Complétez toutes les sections pour voir vos résultats.
+                </p>
+            </div>
+
+            <!-- Profil Section - Consolidated -->
+            <div class="section" id="profil-section">
+                <div class="card mobile-card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                            Profil personnel et situation conjugale
+                        </h2>
+                        <p class="card-description">Informations sur votre profil personnel et votre situation conjugale</p>
+                    </div>
+                    <div class="card-content">
+                        <!-- Conjugal Status -->
+                        <div style="margin-bottom: 24px;">
+                            <h4 style="font-weight: 600; color: #111827; margin-bottom: 12px;">Situation conjugale</h4>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="hasSpouse" value="false" checked>
+                                    <span class="radio-text">Je postule seul(e)</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="hasSpouse" value="true">
+                                    <span class="radio-text">Je postule avec mon conjoint/partenaire</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Personal Information Grid -->
+                        <div class="mobile-grid form-grid" style="margin-bottom: 24px;">
+                            <div class="form-group">
+                                <label class="form-label">Votre âge</label>
+                                <select class="form-select mobile-select" data-score="age">
+                                    <option value="">Sélectionnez votre âge</option>
+                                    <option value="0">Moins de 18 ans ou 43+ ans</option>
+                                    <option value="130">18-30 ans</option>
+                                    <option value="124">31 ans</option>
+                                    <option value="118">32 ans</option>
+                                    <option value="112">33 ans</option>
+                                    <option value="106">34 ans</option>
+                                    <option value="100">35 ans</option>
+                                    <option value="88">36 ans</option>
+                                    <option value="76">37 ans</option>
+                                    <option value="64">38 ans</option>
+                                    <option value="52">39 ans</option>
+                                    <option value="40">40 ans</option>
+                                    <option value="26">41 ans</option>
+                                    <option value="13">42 ans</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Niveau de scolarité</label>
+                                <select class="form-select mobile-select" data-score="education">
+                                    <option value="">Sélectionner le niveau d'éducation</option>
+                                    <option value="0">Aucun / Secondaire non terminé</option>
+                                    <option value="20">Secondaire général ou professionnel</option>
+                                    <option value="40">Post-secondaire technique (1-2 ans)</option>
+                                    <option value="70">DEC technique / Post-secondaire (3 ans)</option>
+                                    <option value="90">Universitaire 1er cycle (Baccalauréat 3+ ans)</option>
+                                    <option value="110">Universitaire 2e cycle (Maîtrise)</option>
+                                    <option value="130">Universitaire 3e cycle (Doctorat)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Domaine de formation
+                                    <button type="button" onclick="toggleFieldExplanation()" style="margin-left: 8px; font-size: 12px; color: #2563eb; text-decoration: underline; background: none; border: none; cursor: pointer;">+ d'infos</button>
+                                </label>
+                                <select class="form-select mobile-select" data-score="fieldOfStudy">
+                                    <option value="">Sélectionner la catégorie de domaine</option>
+                                    <option value="0">Non applicable / Non listé</option>
+                                    <option value="10">Domaine général / Peu en demande</option>
+                                    <option value="40">TI, Génie, Gestion spécialisée, Finance</option>
+                                    <option value="70">Santé, Services sociaux, Enseignement, Éducation</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Expérience de travail</label>
+                                <select class="form-select mobile-select" data-score="workExperience">
+                                    <option value="">Sélectionner la durée d'expérience</option>
+                                    <option value="0">Moins de 6 mois</option>
+                                    <option value="20">6-11 mois</option>
+                                    <option value="40">12-23 mois</option>
+                                    <option value="60">24-35 mois</option>
+                                    <option value="80">36-47 mois</option>
+                                    <option value="100">48+ mois</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Field Explanation -->
+                        <div id="field-explanation" style="display: none; margin-top: 16px; padding: 16px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; font-size: 14px; margin-bottom: 24px;">
+                            <div style="margin-bottom: 12px;">
+                                <h5 style="font-weight: 600; color: #1e40af; margin-bottom: 4px;">1. Domaine général / Peu en demande (10 pts)</h5>
+                                <p style="color: #1e40af; font-size: 12px; line-height: 1.4; margin-bottom: 8px;">
+                                    Formations générales sans spécialisation technique pointue. Exemples : Sciences humaines générales, Arts sans lien numérique, Administration générale.
+                                </p>
+                            </div>
+                            <div style="margin-bottom: 12px;">
+                                <h5 style="font-weight: 600; color: #1e40af; margin-bottom: 4px;">2. Non applicable / Non listé (0 pts)</h5>
+                                <p style="color: #1e40af; font-size: 12px; line-height: 1.4; margin-bottom: 8px;">
+                                    Si votre domaine ne correspond à aucune catégorie ou si vous n'êtes pas certain.
+                                </p>
+                            </div>
+                            <div style="margin-bottom: 12px;">
+                                <h5 style="font-weight: 600; color: #1e40af; margin-bottom: 4px;">3. TI, Génie, Gestion spécialisée, Finance (40 pts)</h5>
+                                <p style="color: #1e40af; font-size: 12px; line-height: 1.4; margin-bottom: 8px;">
+                                    Développeurs, Ingénieurs (civil, mécanique, électrique), Gestionnaires de projet TI, Comptables CPA, Analystes financiers.
+                                </p>
+                            </div>
+                            <div>
+                                <h5 style="font-weight: 600; color: #1e40af; margin-bottom: 4px;">4. Santé, Services sociaux, Enseignement (70 pts)</h5>
+                                <p style="color: #1e40af; font-size: 12px; line-height: 1.4;">
+                                    Infirmiers, Préposés aux bénéficiaires, Médecins, Travailleurs sociaux, Enseignants, Éducateurs petite enfance. Note : Professions souvent réglementées.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Spouse Information -->
+                        <div id="spouse-fields" style="display: none;">
+                            <h4 style="font-weight: 600; color: #111827; margin-bottom: 12px;">Informations du conjoint/partenaire</h4>
+                            <div class="mobile-grid form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">Compétences orales françaises du conjoint</label>
+                                    <select class="form-select mobile-select" data-score="spouseFrenchOral">
+                                        <option value="">Sélectionner le niveau NCLC</option>
+                                        <option value="0">NCLC 1-4</option>
+                                        <option value="10">NCLC 5-6</option>
+                                        <option value="20">NCLC 7+</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Âge du conjoint</label>
+                                    <select class="form-select mobile-select" data-score="spouseAge">
+                                        <option value="">Sélectionnez l'âge</option>
+                                        <option value="20">18-35 ans</option>
+                                        <option value="10">36-40 ans</option>
+                                        <option value="0">41+ ans</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Éducation du conjoint</label>
+                                    <select class="form-select mobile-select" data-score="spouseEducation">
+                                        <option value="">Sélectionner le niveau d'éducation</option>
+                                        <option value="0">Aucun / Secondaire non terminé</option>
+                                        <option value="5">Secondaire</option>
+                                        <option value="10">Post-secondaire / DEC / Baccalauréat</option>
+                                        <option value="20">Diplôme d'études supérieures (Maîtrise/Doctorat)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Domaine d'études du conjoint</label>
+                                    <select class="form-select mobile-select" data-score="spouseFieldOfStudy">
+                                        <option value="">Sélectionner la catégorie de domaine</option>
+                                        <option value="0">Domaine non en demande</option>
+                                        <option value="10">Domaine en demande</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- French Language Skills -->
+            <div class="section" id="french-section">
+                <div class="card mobile-card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <span style="font-size: 18px;">🇫🇷</span>
+                            Compétences linguistiques en français (NCLC)
+                        </h2>
+                        <p class="card-description">Points pour chacune des quatre compétences linguistiques françaises</p>
+                    </div>
+                    <div class="card-content mobile-grid form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Compréhension orale (Écoute)</label>
+                            <select class="form-select mobile-select" data-score="frenchOralComprehension">
+                                <option value="">Sélectionner le niveau NCLC</option>
+                                <option value="0">NCLC 1-4</option>
+                                <option value="20">NCLC 5</option>
+                                <option value="40">NCLC 6</option>
+                                <option value="80">NCLC 7</option>
+                                <option value="90">NCLC 8</option>
+                                <option value="100">NCLC 9</option>
+                                <option value="110">NCLC 10+</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Production orale (Expression)</label>
+                            <select class="form-select mobile-select" data-score="frenchOralProduction">
+                                <option value="">Sélectionner le niveau NCLC</option>
+                                <option value="0">NCLC 1-4</option>
+                                <option value="20">NCLC 5</option>
+                                <option value="40">NCLC 6</option>
+                                <option value="80">NCLC 7</option>
+                                <option value="90">NCLC 8</option>
+                                <option value="100">NCLC 9</option>
+                                <option value="110">NCLC 10+</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Compréhension écrite (Lecture)</label>
+                            <select class="form-select mobile-select" data-score="frenchWrittenComprehension">
+                                <option value="">Sélectionner le niveau NCLC</option>
+                                <option value="0">NCLC 1-4</option>
+                                <option value="10">NCLC 5</option>
+                                <option value="20">NCLC 6</option>
+                                <option value="30">NCLC 7+</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Production écrite (Écriture)</label>
+                            <select class="form-select mobile-select" data-score="frenchWrittenProduction">
+                                <option value="">Sélectionner le niveau NCLC</option>
+                                <option value="0">NCLC 1-4</option>
+                                <option value="10">NCLC 5</option>
+                                <option value="20">NCLC 6</option>
+                                <option value="30">NCLC 7+</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- English Language Skills -->
+            <div class="section" id="english-section">
+                <div class="card mobile-card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <span style="font-size: 18px;">🇬🇧</span>
+                            Compétences linguistiques en anglais - Points bonus (CLB)
+                        </h2>
+                        <p class="card-description">Points bonus pour la maîtrise de l'anglais</p>
+                    </div>
+                    <div class="card-content mobile-grid form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Écoute</label>
+                            <select class="form-select mobile-select" data-score="englishOralComprehension">
+                                <option value="">Sélectionner le niveau CLB</option>
+                                <option value="0">CLB 1-4</option>
+                                <option value="6">CLB 5-8</option>
+                                <option value="12">CLB 9+</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Expression</label>
+                            <select class="form-select mobile-select" data-score="englishOralProduction">
+                                <option value="">Sélectionner le niveau CLB</option>
+                                <option value="0">CLB 1-4</option>
+                                <option value="6">CLB 5-8</option>
+                                <option value="12">CLB 9+</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Lecture</label>
+                            <select class="form-select mobile-select" data-score="englishWrittenComprehension">
+                                <option value="">Sélectionner le niveau CLB</option>
+                                <option value="0">CLB 1-4</option>
+                                <option value="6">CLB 5-8</option>
+                                <option value="12">CLB 9+</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Écriture</label>
+                            <select class="form-select mobile-select" data-score="englishWrittenProduction">
+                                <option value="">Sélectionner le niveau CLB</option>
+                                <option value="0">CLB 1-4</option>
+                                <option value="6">CLB 5-8</option>
+                                <option value="12">CLB 9+</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quebec-Specific Factors -->
+            <div class="section" id="quebec-section">
+                <div class="card mobile-card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <svg class="card-icon blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            Facteurs spécifiques au Québec
+                        </h2>
+                        <p class="card-description">Points bonus pour les connexions au Québec</p>
+                    </div>
+                    <div class="card-content mobile-grid form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Diplôme du Québec</label>
+                            <select class="form-select mobile-select" data-score="quebecDiploma">
+                                <option value="">Sélectionner le diplôme du Québec</option>
+                                <option value="0">Aucun diplôme du Québec</option>
+                                <option value="70">DEP (≥1800h) / AEC / DEC technique</option>
+                                <option value="100">Diplôme universitaire (Baccalauréat, Maîtrise, Doctorat)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Expérience de travail au Québec</label>
+                            <select class="form-select mobile-select" data-score="quebecWorkExperience">
+                                <option value="">Sélectionner l'expérience de travail au Québec</option>
+                                <option value="0">Aucune expérience de travail au Québec</option>
+                                <option value="70">6-11 mois de travail qualifié</option>
+                                <option value="110">12+ mois de travail qualifié</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Factors - Now includes Financial Autonomy -->
+            <div class="section" id="autres-section">
+                <div class="card mobile-card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                            Facteurs additionnels
+                        </h2>
+                        <p class="card-description">Autres facteurs qui peuvent ajouter des points</p>
+                    </div>
+                    <div class="card-content mobile-grid form-grid-3">
+                        <div class="form-group">
+                            <label class="form-label">Offre d'emploi validée (MIFI validée)</label>
+                            <select class="form-select mobile-select" data-score="jobOffer">
+                                <option value="">Sélectionner le type d'offre d'emploi</option>
+                                <option value="0">Aucune offre d'emploi</option>
+                                <option value="180">Offre d'emploi DANS la région métropolitaine de Montréal</option>
+                                <option value="380">Offre d'emploi HORS de la région métropolitaine de Montréal</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Enfants à charge</label>
+                            <select class="form-select mobile-select" data-score="children">
+                                <option value="">Sélectionner le nombre d'enfants</option>
+                                <option value="0">Aucun enfant</option>
+                                <option value="30">1 enfant</option>
+                                <option value="55">2+ enfants</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Famille proche au Québec</label>
+                            <select class="form-select mobile-select" data-score="familyInQuebec">
+                                <option value="">Famille au Québec?</option>
+                                <option value="0">Non</option>
+                                <option value="20">Oui</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Autonomy Section - Now part of Additional Factors -->
+                <div class="card mobile-card" style="margin-top: 16px;">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <svg class="card-icon orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12,6 12,12 16,14"/>
+                            </svg>
+                            Capacité d'autonomie financière (Condition Essentielle)
+                        </h2>
+                        <p class="card-description">Cette condition est obligatoire pour obtenir le CSQ et la résidence permanente</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="financial-checkbox">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="financial-autonomy-checkbox">
+                                <span class="checkbox-text">
+                                    Je comprends que je dois prouver ma capacité d'autonomie financière pour subvenir à mes besoins et à ceux de ma famille pendant les 3 premiers mois. (Ceci n'ajoute pas de points au classement Arrima mais est obligatoire pour le CSQ/RP)
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Form and Results -->
+            <div class="results-container" id="results-section">
+                <!-- Email Overlay -->
+                <div class="email-overlay mobile-email-overlay" id="email-overlay">
+                    <div class="email-card mobile-card">
+                        <div class="email-header">
+                            <h2 class="email-title">
+                                <svg class="email-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
+                                Obtenez vos résultats
+                            </h2>
+                            <p class="email-description">Entrez votre courriel pour voir votre répartition détaillée des points</p>
+                        </div>
+                        <form class="email-form" id="email-form">
+                            <div class="form-group">
+                                <label class="form-label">Adresse courriel</label>
+                                <input type="email" id="email-input" class="form-input mobile-select" placeholder="votre.courriel@exemple.com" required>
+                            </div>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="privacy-checkbox" required>
+                                    <span class="checkbox-text">
+                                        J'accepte la <a href="#" class="privacy-link">Politique de confidentialité</a> et les Conditions d'utilisation
+                                    </span>
+                                </label>
+                            </div>
+                            <button type="submit" class="submit-btn">
+                                <svg class="submit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                    <circle cx="12" cy="16" r="1"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                </svg>
+                                Débloquer mes résultats
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Results Content -->
+                <div class="results-content" id="results-content">
+                    <div class="card mobile-card">
+                        <div class="card-header">
+                            <h2 class="card-title">Répartition détaillée des points</h2>
+                            <p class="card-description">Répartition complète de tous les points par catégorie</p>
+                        </div>
+                        <div class="card-content">
+                            <div class="mobile-grid results-grid">
+                                <div class="results-section">
+                                    <h4 class="results-title blue">Compétences linguistiques</h4>
+                                    <div class="score-items">
+                                        <div class="score-item">
+                                            <span>Compréhension orale:</span>
+                                            <span class="score-badge" id="score-french-oral-comp">0 pts</span>
+                                        </div>
+                                        <div class="score-item">
+                                            <span>Production orale:</span>
+                                            <span class="score-badge" id="score-french-oral-prod">0 pts</span>
+                                        </div>
+                                        <div class="score-item">
+                                            <span>Compréhension écrite:</span>
+                                            <span class="score-badge" id="score-french-written-comp">0 pts</span>
+                                        </div>
+                                        <div class="score-item">
+                                            <span>Production écrite:</span>
+                                            <span class="score-badge" id="score-french-written-prod">0 pts</span>
+                                        </div>
+                                        <div class="score-item subtotal">
+                                            <span>Sous-total français:</span>
+                                            <span class="score-badge blue" id="score-french-total">0 pts</span>
+                                        </div>
+                                        <div class="score-separator"></div>
+                                        <div class="score-item">
+                                            <span>Anglais (toutes compétences):</span>
+                                            <span class="score-badge" id="score-english-total">0 pts</span>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="results-title purple">Capital humain</h4>
+                                    <div class="score-items">
+                                        <div class="score-item">
+                                            <span>Âge:</span>
+                                            <span class="score-badge" id="score-age">0 pts</span>
+                                        </div>
+                                        <div class="score-item">
+                                            <span>Niveau de scolarité:</span>
+                                            <span class="score-badge" id="score-education">0 pts</span>
+                                        </div>
+                                        <div class="score-item">
+                                            <span>Domaine de formation:</span>
+                                            <span class="score-badge" id="score-field">0 pts</span>
+                                        </div>
+                                        <div class="score-item">
+                                            <span>Expérience de travail:</span>
+                                            <span class="score-badge" id="score-work">0 pts</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="results-section">
+                                    <h4 class="results-title orange">Facteurs Québec</h4>
+                                    <div class="score-items">
+                                        <div class="score-item">
+                                            <span>Diplôme du Québec:</span>
+                                            <span class="score-badge" id="score-quebec-diploma">0 pts</span>
+                                        </div>
+                                        <div class="score-item">
+                                            <span>Expérience de travail au Québec:</span>
+                                            <span class="score-badge" id="score-quebec-work">0 pts</span>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="results-title pink">Facteurs conjoint</h4>
+                                    <div class="score-items">
+                                        <div class="score-item">
+                                            <span>Compétences orales françaises du conjoint:</span>
+                                            <span class="score-badge" id="score-spouse-french">0 pts</span>
+                                        </div>
+                                        <div class="score-item">
+                                            <span>Âge du conjoint:</span>
+                                            <span class="score-badge" id="score-spouse-age">0 pts</span>
+                                        </div>
+                                        <div class="score-item">
+                                            <span>Éducation du conjoint:</span>
+                                            <span class="score-badge" id="score-spouse-education">0 pts</span>
+                                        </div>
+                                        <div class="score-item">
+                                            <span>Domaine d'études du conjoint:</span>
+                                            <span class="score-badge" id="score-spouse-field">0 pts</span>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="results-title green">Facteurs additionnels</h4>
+                                    <div class="score-items">
+                                        <div class="score-item">
+                                            <span>Offre d'emploi:</span>
+                                            <span class="score-badge" id="score-job-offer">0 pts</span>
+                                        </div>
+                                        <div class="score-item">
+                                            <span>Enfants à charge:</span>
+                                            <span class="score-badge" id="score-children">0 pts</span>
+                                        </div>
+                                        <div class="score-item">
+                                            <span>Famille proche au Québec:</span>
+                                            <span class="score-badge" id="score-family">0 pts</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="total-score-section">
+                                <div class="total-score">
+                                    <span class="total-label">SCORE TOTAL:</span>
+                                    <span class="total-score-text" id="total-score">0 points</span>
+                                </div>
+                                <div class="completion-percentage">
+                                    <span class="completion-label">Progression du formulaire:</span>
+                                    <span class="completion-text" id="completion-percentage">0% complété</span>
+                                </div>
+                            </div>
+
+                            <!-- Financial Status -->
+                            <div class="financial-status" id="financial-status" style="display: none;"></div>
+
+                            <!-- Recommendations -->
+                            <div class="recommendations" id="recommendations" style="display: none;">
+                                <div class="recommendations-header">
+                                    <h3 class="recommendations-title">
+                                        <svg class="recommendations-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                                            <polyline points="17 6 23 6 23 12"/>
+                                        </svg>
+                                        Interprétation de Votre Score et Prochaines Étapes
+                                    </h3>
+                                </div>
+                                <div class="score-interpretation" id="score-interpretation">
+                                    <p>Complétez le formulaire pour voir votre interprétation personnalisée.</p>
+                                </div>
+
+                                <div class="recommendations-list" id="recommendations-list">
+                                    <h4>Recommandations personnalisées :</h4>
+                                    <p>Complétez le formulaire pour voir vos recommandations.</p>
+                                </div>
+
+                                <div class="invitation-info">
+                                    <h4>Rappel sur les Invitations :</h4>
+                                    <p>Les invitations Arrima dépendent de nombreux facteurs : le nombre de candidats dans le bassin, les besoins du marché du travail québécois, les objectifs d'immigration du gouvernement, la répartition géographique souhaitée, et les priorités sectorielles. Le score minimum varie selon ces facteurs et peut changer d'un tirage à l'autre.</p>
+                                    <div class="recent-scores">
+                                        <p><strong>Scores d'Invitation Récents (Tirages Généraux sans offre/profession ciblée) :</strong> Souvent observés entre 570 et 620+ points. Cette fourchette est indicative et évolue.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="reset-section" id="reset-section" style="display: none;">
+                                <button class="reset-btn" id="reset-btn">Réinitialiser le calculateur</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disclaimer -->
+            <div class="disclaimer">
+                <div class="disclaimer-content">
+                    <p>
+                        <strong>© 2025 Simulateur de Score de Classement Arrima Québec. Conçu par J'arrive Québec.</strong><br><br>
+                        Cet outil fournit une estimation et est à titre indicatif seulement. Les barèmes de points sont des estimations basées sur les informations publiques et les tendances observées et peuvent différer des calculs officiels du MIFI. Ce score ne garantit PAS une invitation.<br><br>
+                        Veuillez toujours consulter le site officiel de l'immigration du Québec (MIFI) pour les informations exactes et les critères à jour.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-content">
+            <div class="progress-header">
+                <span class="progress-label">Évolution de votre score</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <p class="progress-message" id="progress-message">Commencez à remplir le formulaire pour voir votre progression</p>
+        </div>
+    </div>
+
+    <script src="arrima-calculator.js"></script>
+    <script>
+        function toggleFieldExplanation() {
+            const explanation = document.getElementById('field-explanation');
+            if (explanation.style.display === 'none') {
+                explanation.style.display = 'block';
+            } else {
+                explanation.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
