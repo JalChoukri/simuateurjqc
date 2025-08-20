@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur de Score de Classement Arrima Québec 2025 - J'arrive Québec</title>
+    <!-- jsPDF et html2canvas via CDN pour la génération de PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #f1c40f; 
+            --success-color: #2ecc71; 
+            --error-color: #e74c3c;   
+            --light-bg-color: #f4f7f9;
+            --default-text-color: #333;
+            --light-text-color: #fff;
+            --border-color: #ddd;
+            --container-bg-color: #fff;
+            --points-display-bg: #e9f5ff;
+            --points-display-border: var(--primary-color);
+            --points-display-text: #2980b9;
+            --input-focus-shadow: rgba(52, 152, 219, 0.2);
+            --radio-icon-color: var(--secondary-color); 
+
+            --font-family-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            --border-radius-sm: 4px;
+            --border-radius-md: 6px;
+            --border-radius-lg: 8px;
+            --padding-sm: 8px;
+            --padding-md: 12px;
+            --padding-lg: 20px;
+            --sticky-bar-height: 85px; 
+        }
+
+        body {
+            font-family: var(--font-family-main);
+            margin: 0;
+            background-color: var(--light-bg-color);
+            color: var(--default-text-color);
+        }
+        .app-wrapper { 
+            padding: var(--padding-lg) var(--padding-lg) calc(var(--sticky-bar-height) + var(--padding-lg)) var(--padding-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+        }
+
+        .container {
+            background-color: var(--container-bg-color);
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 800px; 
+        }
+
+        h1, h2, h3 {
+            color: var(--secondary-color);
+            text-align: center;
+        }
+        h1 { margin-bottom: 30px; font-size: 24px; }
+        h2 { margin-top: 30px; margin-bottom: 20px; font-size: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;}
+        h3 { margin-top: 20px; margin-bottom: 15px; font-size: 18px; text-align:left; }
+        
+        .form-section {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #eee;
+        }
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .form-group {
+            margin-bottom: var(--padding-lg);
+        }
+        .form-group > label { 
+            display: block; 
+            margin-bottom: var(--padding-sm);
+            color: #555;
+            font-weight: 600;
+        }
+        .label-instruction {
+            font-weight: normal;
+            font-size: 0.85em;
+            color: #777;
+            display: block; 
+            margin-top: 4px; 
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: var(--padding-md);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            box-sizing: border-box;
+            font-size: 16px;
+            background-color: var(--container-bg-color);
+            color: var(--default-text-color);
+        }
+        #autonomie_financiere_checkbox { /* Specific for this checkbox */
+            width: auto;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        .checkbox-label { 
+            font-weight: normal;
+            display: inline; 
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px var(--input-focus-shadow);
+        }
+
+        .radio-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 10px;
+        }
+        .radio-group.single-column, .radio-group.two-column { 
+            grid-template-columns: 1fr;
+        }
+         @media (min-width: 600px) { 
+            .radio-group.two-column-desktop {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .radio-option-wrapper { 
+            display: flex;
+            flex-direction: column; 
+            margin-bottom: 5px; 
+        }
+
+        .radio-option label {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            background-color: #fff;
+            font-weight: normal; 
+            margin-bottom: 0; 
+            height: 100%; 
+            box-sizing: border-box;
+        }
+        .radio-option input[type="radio"] { 
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .radio-option .radio-icon {
+            margin-right: 10px;
+            font-size: 1.3em; 
+            color: var(--radio-icon-color);
+            width: 25px; 
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .radio-option .radio-text {
+            flex-grow: 1;
+            font-size: 0.9em; 
+            line-height: 1.3;
+        }
+        .radio-option input[type="radio"]:checked + label {
+            background-color: var(--points-display-bg);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 500;
+            box-shadow: 0 0 0 2px var(--primary-color) inset;
+        }
+        .radio-option input[type="radio"]:focus-visible + label {
+            outline: none; 
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px var(--container-bg-color), 0 0 0 4px var(--primary-color);
+        }
+        .radio-option label:hover {
+            background-color: #f0f8ff; 
+            border-color: var(--primary-color);
+        }
+        
+        .radio-accordion-content {
+            display: none; 
+            padding: 10px 15px;
+            background-color: #f9f9f9; 
+            border: 1px solid #e0e0e0;
+            border-top: none; 
+            border-radius: 0 0 var(--border-radius-md) var(--border-radius-md); 
+            margin-top: -1px; 
+            font-size: 0.88em;
+            line-height: 1.5;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .radio-accordion-content h4 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            font-size: 1em;
+            text-align: left;
+            border-bottom: none;
+        }
+        .radio-accordion-content ul {
+            margin: 0 0 10px 0;
+            padding-left: 20px;
+        }
+        .radio-accordion-content li {
+            margin-bottom: 5px;
+        }
+        .radio-accordion-content p:last-child {
+            margin-bottom: 0;
+        }
+        .radio-option label[data-has-accordion="true"] { 
+            cursor: pointer;
+        }
+
+        .points-display {
+            margin-top: var(--padding-sm);
+            padding: 8px 10px;
+            background-color: var(--points-display-bg);
+            border-left: 4px solid var(--points-display-border);
+            color: var(--points-display-text);
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: var(--border-radius-sm);
+        }
+        
+        #spouse_section_wrapper {
+            padding: 15px;
+            border: 1px solid var(--primary-color);
+            border-radius: var(--border-radius-md);
+            margin-top: 10px;
+            background-color: #fafdff;
+        }
+
+        .compact-sticky-bar { 
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background-color: var(--secondary-color); color: var(--light-text-color);
+            box-shadow: 0 -3px 10px rgba(0,0,0,0.15); z-index: 1000; padding: var(--padding-sm) 0; 
+        }
+        .compact-sticky-bar-content {
+            max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; 
+            align-items: stretch; padding: 0 var(--padding-md); 
+        }
+        .compact-score-tier-bar-container {
+            width: 100%; height: 8px; background-color: #5e6a77; 
+            border-radius: var(--border-radius-sm); margin-bottom: var(--padding-sm); overflow: hidden;
+        }
+        .compact-score-tier-bar {
+            width: 0%; height: 100%; background-color: var(--primary-color);
+            transition: width 0.5s ease-in-out, background-color 0.5s ease-in-out;
+            border-radius: var(--border-radius-sm);
+        }
+        .compact-score-details {
+            display: flex; justify-content: space-around; align-items: center;
+            width: 100%; font-size: 13px; font-weight: 500; flex-wrap: wrap;
+        }
+        .compact-score-details span { margin: 2px 5px; }
+        .compact-score-details .status-high { color: var(--success-color); font-weight: bold;}
+        .compact-score-details .status-medium { color: var(--accent-color); font-weight: bold;}
+        .compact-score-details .status-low { color: var(--error-color); font-weight: bold;}
+
+        .results-summary-section { 
+            margin-top: 30px; padding: var(--padding-lg);
+            border-radius: var(--border-radius-md);
+            transition: background-color 0.5s ease-in-out; border: 1px solid var(--border-color);
+        }
+        .results-summary-section h2 { color: var(--secondary-color); margin-bottom: 15px; text-align:left; border-bottom:none; }
+        .results-summary-section p, .results-summary-section ul { color: #444; line-height: 1.6; margin-bottom: 10px;}
+        .results-summary-section ul { padding-left: 20px; }
+        .arrima-score-display { /* For on-page score display */
+             font-size: 1.5em; font-weight: bold; color: var(--primary-color); text-align: center; margin-bottom: 20px;
+        }
+
+        .age-validation-message {
+            font-size: 0.85em; color: var(--error-color); margin-top: 5px; height: 1em;
+        }
+        
+        #pdf-content-for-capture { 
+            display: none; 
+            position: absolute; 
+            left: -9999px; 
+            width: 287mm; 
+            background: white; 
+            padding: 5mm; 
+            box-sizing: border-box;
+            color: #333; 
+        }
+        #pdf-content-for-capture h2, #pdf-content-for-capture h3 {
+            color: var(--secondary-color); text-align: left;
+        }
+        #pdf-content-for-capture h2 { font-size: 16pt; margin-bottom: 8pt; border-bottom: 1px solid var(--primary-color); padding-bottom: 3pt;}
+        #pdf-content-for-capture h3 { font-size: 14pt; margin-bottom: 6pt; margin-top: 10pt; border-bottom: none;}
+        #pdf-content-for-capture .arrima-score-display-pdf { font-size: 18pt; color: var(--primary-color); text-align: center; margin-bottom: 10pt;}
+        #pdf-content-for-capture p, #pdf-content-for-capture li { font-size: 10pt; line-height: 1.5; margin-bottom: 5pt; }
+        #pdf-content-for-capture ul { padding-left: 15pt; list-style-position: outside;}
+        #pdf-content-for-capture strong { color: var(--primary-color); }
+        #pdf-content-for-capture em { font-style: italic; } 
+        #pdf-footer {
+            margin-top: 15pt; text-align: center; font-size: 8pt; color: #777; border-top: 1px solid #ccc; padding-top: 5pt;
+        }
+
+
+        .pdf-button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        #generate_pdf_button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: var(--border-radius-md);
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #generate_pdf_button:hover {
+            background-color: var(--secondary-color);
+        }
+        #pdf_generation_status {
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .footer { 
+            margin-top: 40px; text-align: center; font-size: 0.9em; color: #777;
+        }
+        .footer p { margin: 5px 0; }
+        .footer a { color: var(--primary-color); text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="app-wrapper">
+        <div class="container">
+            <h1>Simulateur de Score de Classement Arrima Québec 2025</h1>
+
+             <div class="form-section">
+                <h3>Votre Situation Conjugale</h3>
+                <div class="form-group">
+                    <label id="marital_status_label">Statut :</label>
+                    <div class="radio-group two-column-desktop" id="marital_status_radiogroup" role="radiogroup" aria-labelledby="marital_status_label">
+                        {/* Les options "Je soumets seul(e)" et "Avec époux/conjoint de fait" seront injectées ici par JS */}
+                    </div>
+                </div>
+            </div>
+            
+            <h2>Profil du Demandeur Principal</h2>
+            <div class="form-section">
+                <h3>A. Connaissances linguistiques</h3>
+                <h4>Français (NCLC)</h4>
+                 <div class="form-group">
+                    <label id="fr_co_label_dp">Compréhension orale</label>
+                    <div class="radio-group" id="fr_co_radiogroup_dp" role="radiogroup" aria-labelledby="fr_co_label_dp"></div>
+                    <div class="points-display" id="fr_co_points_dp">Points: 0</div>
+                </div>
+                <div class="form-group">
+                    <label id="fr_po_label_dp">Production orale</label>
+                    <div class="radio-group" id="fr_po_radiogroup_dp" role="radiogroup" aria-labelledby="fr_po_label_dp"></div>
+                    <div class="points-display" id="fr_po_points_dp">Points: 0</div>
+                </div>
+                <div class="form-group">
+                    <label id="fr_ce_label_dp">Compréhension écrite</label>
+                     <div class="radio-group single-column" id="fr_ce_radiogroup_dp" role="radiogroup" aria-labelledby="fr_ce_label_dp"></div>
+                    <div class="points-display" id="fr_ce_points_dp">Points: 0</div>
+                </div>
+                <div class="form-group">
+                    <label id="fr_pe_label_dp">Production écrite</label>
+                    <div class="radio-group single-column" id="fr_pe_radiogroup_dp" role="radiogroup" aria-labelledby="fr_pe_label_dp"></div>
+                    <div class="points-display" id="fr_pe_points_dp">Points: 0</div>
+                </div>
+                
+                <h4>Anglais (CLB) - Points Bonus</h4>
+                <div class="form-group">
+                    <label id="en_co_label_dp">Compréhension orale</label>
+                    <div class="radio-group" id="en_co_radiogroup_dp" role="radiogroup" aria-labelledby="en_co_label_dp"></div>
+                    <div class="points-display" id="en_co_points_dp">Points: 0</div>
+                </div>
+                 <div class="form-group">
+                    <label id="en_po_label_dp">Production orale</label>
+                    <div class="radio-group" id="en_po_radiogroup_dp" role="radiogroup" aria-labelledby="en_po_label_dp"></div>
+                    <div class="points-display" id="en_po_points_dp">Points: 0</div>
+                </div>
+                 <div class="form-group">
+                    <label id="en_ce_label_dp">Compréhension écrite</label>
+                    <div class="radio-group single-column" id="en_ce_radiogroup_dp" role="radiogroup" aria-labelledby="en_ce_label_dp"></div>
+                    <div class="points-display" id="en_ce_points_dp">Points: 0</div>
+                </div>
+                <div class="form-group">
+                    <label id="en_pe_label_dp">Production écrite</label>
+                    <div class="radio-group single-column" id="en_pe_radiogroup_dp" role="radiogroup" aria-labelledby="en_pe_label_dp"></div>
+                    <div class="points-display" id="en_pe_points_dp">Points: 0</div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h3>B. Âge</h3>
+                <div class="form-group">
+                    <label for="age_dp">Âge (au moment de la soumission de la DI)</label>
+                    <input type="number" id="age_dp" placeholder="Entrez votre âge" min="0" max="120" oninput="calculatePoints()">
+                    <div class="points-display" id="age_points_dp">Points: 0</div>
+                    <div class="age-validation-message" id="age_validation_message_dp"></div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>C. Niveau de scolarité</h3>
+                <div class="form-group">
+                    <label id="education_label_dp">Plus haut diplôme obtenu</label>
+                    <div class="radio-group" id="education_radiogroup_dp" role="radiogroup" aria-labelledby="education_label_dp"></div>
+                    <div class="points-display" id="education_points_dp">Points: 0</div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h3>D. Domaine de formation (Estimation)</h3>
+                 <div class="form-group">
+                    <label id="domaine_formation_label_dp_text">
+                        Votre principal domaine d'études/formation est-il étroitement lié à un secteur en demande au Québec ?
+                        <span class="label-instruction">Cliquez sur une option ci-dessous pour voir des exemples de métiers/secteurs correspondants.</span>
+                    </label>
+                    <div class="radio-group" id="domaine_formation_radiogroup_dp" role="radiogroup" aria-labelledby="domaine_formation_label_dp_text"></div>
+                    <div class="points-display" id="domaine_formation_points_dp">Points: 0</div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>E. Expérience professionnelle (hors Québec, qualifiée, dans les 5 dernières années)</h3>
+                <div class="form-group">
+                    <label id="experience_label_dp">Durée de l'expérience</label>
+                    <div class="radio-group" id="experience_radiogroup_dp" role="radiogroup" aria-labelledby="experience_label_dp"></div>
+                    <div class="points-display" id="experience_points_dp">Points: 0</div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>F. Diplôme du Québec - Points Additionnels</h3>
+                <div class="form-group">
+                    <label id="diplome_qc_label_dp">Possédez-vous un diplôme du Québec reconnu ?</label>
+                    <div class="radio-group single-column" id="diplome_qc_radiogroup_dp" role="radiogroup" aria-labelledby="diplome_qc_label_dp"></div>
+                    <div class="points-display" id="diplome_qc_points_dp">Points: 0</div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>G. Expérience de travail au Québec - Points Additionnels (qualifiée, avec permis)</h3>
+                 <div class="form-group">
+                    <label id="experience_qc_label_dp">Avez-vous une expérience de travail qualifiée au Québec (avec permis valide) ?</label>
+                    <div class="radio-group single-column" id="experience_qc_radiogroup_dp" role="radiogroup" aria-labelledby="experience_qc_label_dp"></div>
+                    <div class="points-display" id="experience_qc_points_dp">Points: 0</div>
+                </div>
+            </div>
+
+            <div id="spouse_section_wrapper" style="display: none;">
+                <h2>Profil du Conjoint (si applicable)</h2>
+                <div id="spouse_section">
+                     <h3>A. Connaissances linguistiques du Conjoint (Français Oral)</h3>
+                     <div class="form-group">
+                        <label id="fr_co_label_sp">Compréhension orale (NCLC)</label>
+                        <div class="radio-group" id="fr_co_radiogroup_sp" role="radiogroup" aria-labelledby="fr_co_label_sp"></div>
+                        <div class="points-display" id="fr_co_points_sp">Points: 0</div>
+                    </div>
+                    <div class="form-group">
+                        <label id="fr_po_label_sp">Production orale (NCLC)</label>
+                        <div class="radio-group" id="fr_po_radiogroup_sp" role="radiogroup" aria-labelledby="fr_po_label_sp"></div>
+                        <div class="points-display" id="fr_po_points_sp">Points: 0</div>
+                    </div>
+                    <h3>B. Âge du Conjoint</h3>
+                     <div class="form-group">
+                        <label for="age_sp">Âge du conjoint</label>
+                        <input type="number" id="age_sp" placeholder="Âge du conjoint" min="0" max="120" oninput="calculatePoints()">
+                        <div class="points-display" id="age_points_sp">Points: 0</div>
+                         <div class="age-validation-message" id="age_validation_message_sp"></div>
+                    </div>
+                    <h3>C. Niveau de scolarité du Conjoint</h3>
+                    <div class="form-group">
+                        <label id="education_label_sp">Plus haut diplôme obtenu</label>
+                        <div class="radio-group" id="education_radiogroup_sp" role="radiogroup" aria-labelledby="education_label_sp"></div>
+                        <div class="points-display" id="education_points_sp">Points: 0</div>
+                    </div>
+                    <h3>D. Domaine de formation du Conjoint (Estimation)</h3>
+                    <div class="form-group">
+                        <label id="domaine_formation_label_sp_text">
+                            Domaine de formation principal du conjoint :
+                            <span class="label-instruction">Cliquez sur une option ci-dessous pour voir des exemples.</span>
+                        </label>
+                        <div class="radio-group" id="domaine_formation_radiogroup_sp" role="radiogroup" aria-labelledby="domaine_formation_label_sp_text"></div>
+                        <div class="points-display" id="domaine_formation_points_sp">Points: 0</div>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Facteurs Additionnels</h2>
+            <div class="form-section">
+                <h3>Offre d’emploi validée par le MIFI (Impact Majeur)</h3>
+                 <div class="form-group">
+                    <label id="offre_emploi_label">Possédez-vous une offre d'emploi validée ?</label>
+                    <div class="radio-group single-column" id="offre_emploi_radiogroup" role="radiogroup" aria-labelledby="offre_emploi_label"></div>
+                    <div class="points-display" id="offre_emploi_points">Points: 0</div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h3>Enfants à charge</h3>
+                <div class="form-group">
+                    <label for="enfants_total">Nombre total d'enfants à charge (moins de 22 ans, non mariés, sans enfants)</label>
+                    <input type="number" id="enfants_total" value="0" min="0" max="10" oninput="calculatePoints()">
+                    <div class="points-display" id="enfants_points">Points: 0</div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Famille proche au Québec</h3>
+                <div class="form-group">
+                    <label id="famille_qc_label">Avez-vous de la famille proche au Québec (citoyen canadien ou résident permanent : époux/conjoint, parent, grand-parent, frère/sœur, enfant, petit-enfant) ?</label>
+                     <div class="radio-group single-column" id="famille_qc_radiogroup" role="radiogroup" aria-labelledby="famille_qc_label"></div>
+                    <div class="points-display" id="famille_qc_points">Points: 0</div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h3>Capacité d’autonomie financière (Condition Essentielle)</h3>
+                <div class="form-group">
+                    <input type="checkbox" id="autonomie_financiere_checkbox" onchange="calculatePoints()">
+                    <label for="autonomie_financiere_checkbox" class="checkbox-label">
+                        Je comprends que je dois prouver ma capacité d'autonomie financière pour subvenir à mes besoins et à ceux de ma famille pendant les 3 premiers mois. (Ceci n'ajoute pas de points au classement Arrima mais est obligatoire pour le CSQ/RP).
+                    </label>
+                    <div class="points-display" id="autonomie_financiere_points_display">Information : Conditionnelle</div>
+                </div>
+            </div>
+
+            <div class="results-summary-section" id="results_summary_section_capture_pdf"> 
+                <h2>Votre Score de Classement Arrima Estimé</h2>
+                <div class="arrima-score-display" id="arrima_total_score_display_pdf">Score Total Estimé : 0 points</div> 
+                <hr>
+                <h3>Interprétation de Votre Score et Prochaines Étapes</h3>
+                <div id="interpretation_no_job_offer_text_pdf"> 
+                    <p id="interpretation_intro_no_job_offer_pdf"></p>
+                    <ul id="interpretation_advice_list_no_job_offer_pdf"></ul>
+                    <p id="interpretation_perspective_with_job_offer_pdf"></p>
+                </div>
+                <div id="interpretation_with_job_offer_text_pdf" style="display:none;"> 
+                    <p id="interpretation_intro_with_job_offer_pdf"></p>
+                </div>
+                <p id="autonomy_reminder_pdf" style="display:none;"><strong>Important :</strong> N'oubliez pas de confirmer votre compréhension de l'exigence d'autonomie financière. C'est une condition obligatoire pour le CSQ et la RP.</p>
+                <p><em>Rappel sur les Invitations : Les invitations Arrima dépendent de nombreux facteurs, y compris les besoins spécifiques du Québec, le volume de candidats, et les critères des rondes d'extraction qui peuvent varier (score général, offre d'emploi, professions ciblées).</em></p>
+                <p><em>Scores d'Invitation Récents (Tirages Généraux sans offre/profession ciblée) : Souvent observés entre <strong>570 et 620+ points</strong>. Cette fourchette est indicative et évolue.</em></p>
+            </div>
+            
+            <div id="pdf-content-for-generation" style="display: none;"></div>
+
+            <div class="pdf-button-container">
+                <button id="generate_pdf_button" onclick="generatePDF()">Télécharger Mon Récapitulatif PDF</button>
+                <span id="pdf_generation_status"></span>
+            </div>
+
+            <div class="footer">
+                <p>© 2025 Simulateur de Score de Classement Arrima Québec. Conçu par J'arrive Québec.</p>
+                <p>Cet outil fournit une <strong>estimation</strong> et est à titre indicatif seulement. Les barèmes de points sont des estimations basées sur les informations publiques et les tendances observées et peuvent différer des calculs officiels du MIFI. Ce score ne garantit PAS une invitation.</p>
+                <p>Veuillez toujours consulter le <a href="https://www.quebec.ca/immigration/programmes-immigration/programme-regulier-travailleurs-qualifies/invitation" target="_blank" rel="noopener noreferrer">site officiel de l'immigration du Québec (MIFI)</a> pour les informations exactes et les critères à jour.</p>
+            </div>
+        </div> 
+    </div> 
+    
+    <div class="compact-sticky-bar"> 
+        <div class="compact-sticky-bar-content">
+            <div class="compact-score-tier-bar-container">
+                <div class="compact-score-tier-bar" id="compact_score_tier_bar"></div>
+            </div>
+            <div class="compact-score-details">
+                <span id="sticky_arrima_score">Score Arrima: 0</span>
+                <span id="sticky_overall_status" class="status-low">Amélioration Nécessaire</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- BARÈMES ESTIMATIFS ARRIMA 2025 (À AFFINER IMPÉRATIVEMENT PAR VOS RECHERCHES APPROFONDIES) ---
+        const D_ARRIMA = {
+            maritalStatus: [ 
+                { key: "seul", text: "Je soumets seul(e)", value: "false", icon: "👤" }, // default
+                { key: "avec_conjoint", text: "Avec époux/conjoint de fait", value: "true", icon: "👥" }
+            ],
+            frLangLevelsDP_Oral: [ 
+                { key: "none_NCLC_1_4_o", text: "NCLC 1-4 / Non testé", points: 0, icon: "🔇" },
+                { key: "NCLC_5_o", text: "NCLC 5", points: 20, icon: "💬" }, 
+                { key: "NCLC_6_o", text: "NCLC 6", points: 40, icon: "🗣️" },
+                { key: "NCLC_7_o", text: "NCLC 7", points: 80, icon: "📢" }, 
+                { key: "NCLC_8_o", text: "NCLC 8", points: 90, icon: "🔥" },
+                { key: "NCLC_9_o", text: "NCLC 9", points: 100, icon: "🌟" },
+                { key: "NCLC_10_PLUS_o", text: "NCLC 10+", points: 110, icon: "🏆" }
+            ],
+            frLangLevelsDP_Ecrit: [ 
+                { key: "none_NCLC_1_4_e", text: "NCLC 1-4 / Non testé", points: 0, icon: "📝" },
+                { key: "NCLC_5_e", text: "NCLC 5", points: 10, icon: "✍️" },
+                { key: "NCLC_6_e", text: "NCLC 6", points: 20, icon: "📜" },
+                { key: "NCLC_7_PLUS_e", text: "NCLC 7+", points: 30, icon: "✒️" } 
+            ],
+            enLangLevelsDP: [ 
+                { key: "none_CLB_1_4", text: "CLB 1-4 / Non testé", points: 0, icon: "➖" },
+                { key: "CLB_5_8", text: "CLB 5-8 (par compétence)", points: 6, icon: "💬" }, 
+                { key: "CLB_9_PLUS", text: "CLB 9+ (par compétence)", points: 12, icon: "📢" } 
+            ],
+            educationLevelsDP: [
+                { key: "none_edu", text: "Aucun diplôme / Secondaire non terminé", points: 0, icon: "🚫" },
+                { key: "SEC_GEN_PRO", text: "Secondaire général ou professionnel", points: 20, icon: "🎓" }, 
+                { key: "POST_SEC_TECH_1_2", text: "Post-secondaire technique (1-2 ans)", points: 40, icon: "🧑‍🔧" },
+                { key: "DEC_TECH_POST_SEC_3", text: "DEC technique / Post-secondaire technique (3 ans)", points: 70, icon: "🔩" },
+                { key: "UNIV_BAC", text: "Universitaire 1er cycle (BAC 3 ans+)", points: 90, icon: "🏛️" },
+                { key: "UNIV_MAITRISE", text: "Universitaire 2e cycle (Maîtrise)", points: 110, icon: "🌟" },
+                { key: "UNIV_DOCTORAT", text: "Universitaire 3e cycle (Doctorat)", points: 130, icon: "🏆" } 
+            ],
+            domaineFormationDP: [ 
+                { 
+                    key: "none_dom", 
+                    text: "Non applicable / Mon domaine n'est pas listé ici ➕", 
+                    points: 0, icon: "❓",
+                    examplesHTML: `
+                        <h4>Domaine Non Listé ou Non Applicable</h4>
+                        <p>Si votre domaine d'études ne semble correspondre à aucune des catégories ci-dessous, ou si vous n'êtes pas certain.</p>
+                        <p><em>Il est recommandé de consulter les listes de professions (CNP) régulièrement ciblées par Arrima pour évaluer la demande pour votre profil spécifique.</em></p>
+                    `
+                },
+                { 
+                    key: "DOM_NEUTRE_PEU", 
+                    text: "Domaine général / Peu en demande ➕", 
+                    points: 10, icon: "🤏",
+                    examplesHTML: `
+                        <h4>Domaine général / Peu en demande : Exemples indicatifs</h4>
+                        <p>Concerne souvent des formations plus générales sans spécialisation technique pointue ou expérience directement applicable dans un secteur actuellement en pénurie au Québec. Exemples :</p>
+                        <ul>
+                            <li>Certaines branches des sciences humaines (histoire générale, philosophie sans application spécifique)</li>
+                            <li>Arts (sans lien avec le numérique ou des métiers d'artisanat en demande)</li>
+                            <li>Administration générale sans spécialisation technique ou expérience sectorielle recherchée.</li>
+                        </ul>
+                        <p><em><strong>Note :</strong> L'important est souvent la transférabilité des compétences et l'expérience. Ce domaine peut quand même être valorisé par votre expérience professionnelle.</em></p>
+                    ` 
+                },
+                { 
+                    key: "DOM_DEMANDE_TI_GENIE_GESTION", 
+                    text: "TI, Génie, Gestion Spécialisée, Finance ➕", 
+                    points: 40, icon: "💻",
+                    examplesHTML: `
+                        <h4>TI, Génie, Gestion Spécialisée, Finance : Exemples indicatifs</h4>
+                        <ul>
+                            <li><strong>TI/Logiciel :</strong> Développeurs (web, mobile, logiciel, jeux), Ingénieurs logiciel, Analystes de données, Spécialistes cybersécurité, Administrateurs systèmes/réseaux.</li>
+                            <li><strong>Génie (autre) :</strong> Ingénieurs (civil, mécanique, électrique, industriel), Techniciens en génie.</li>
+                            <li><strong>Gestion/Finance :</strong> Gestionnaires de projet (surtout TI/Génie), Comptables (CPA), Analystes financiers, Spécialistes RH (avec exp. pertinente).</li>
+                        </ul>
+                        <p><em><strong>Note :</strong> Les certifications et l'expérience spécifique sont clés.</em></p>
+                    `
+                },
+                { 
+                    key: "DOM_FORTE_DEMANDE_SANTE_ENSEIGNEMENT", 
+                    text: "Santé, Services Sociaux, Enseignement, Éducation ➕", 
+                    points: 70, icon: "❤️",
+                    examplesHTML: `
+                        <h4>Santé, Services Sociaux, Enseignement, Éducation : Exemples indicatifs</h4>
+                        <ul>
+                            <li><strong>Santé :</strong> Infirmiers/Infirmières (autorisés/auxiliaires), Préposés aux bénéficiaires, Médecins (certaines spécialités), Pharmaciens, Technologues médicaux.</li>
+                            <li><strong>Services Sociaux :</strong> Travailleurs sociaux, Psychologues.</li>
+                            <li><strong>Enseignement/Éducation :</strong> Enseignants (primaire/secondaire, surtout maths, sciences, français), Éducateurs/Éducatrices de la petite enfance.</li>
+                        </ul>
+                        <p><em><strong>Note :</strong> Beaucoup de ces professions sont réglementées au Québec. Une reconnaissance professionnelle peut être nécessaire.</em></p>
+                    `
+                } 
+            ],
+            experienceLevelsDP: [ 
+                { key: "none_exp", text: "< 6 mois / Aucune", points: 0, icon: "⏳" },
+                { key: "EXP_6_11M", text: "6–11 mois", points: 20, icon: "💼" },
+                { key: "EXP_12_23M", text: "12–23 mois", points: 40, icon: "🗓️" },
+                { key: "EXP_24_35M", text: "24–35 mois", points: 60, icon: "📈" },
+                { key: "EXP_36_47M", text: "36–47 mois", points: 80, icon: "📊" },
+                { key: "EXP_48M_PLUS", text: "≥ 48 mois", points: 100, icon: "🏆" } 
+            ],
+            diplomeQC_DP: [
+                { key: "none_dip_qc", text: "Non", points: 0, icon: "🚫" },
+                { key: "DEP_1800H_AEC_DEC_TECH_QC", text: "DEP (≥1800h) / AEC / DEC technique du Québec", points: 70, icon: "🍁" }, 
+                { key: "UNIV_QC_BAC_PLUS", text: "Diplôme universitaire du Québec (BAC, Maîtrise, Doc)", points: 100, icon: "🏛️" } 
+            ],
+            experienceQC_DP: [
+                { key: "none_exp_qc", text: "Non", points: 0, icon: "🚫" },
+                { key: "EXP_QC_6_11M", text: "6 à 11 mois", points: 70, icon: "💼" }, 
+                { key: "EXP_QC_12M_PLUS", text: "12 mois et plus", points: 110, icon: "🏆" }
+            ],
+            frLangLevelsSP_Oral: [ 
+                { key: "none_NCLC_1_4_sp_o", text: "NCLC 1-4 / Non testé", points: 0, icon: "🔇" },
+                { key: "NCLC_5_6_sp_o", text: "NCLC 5-6", points: 10, icon: "💬" },
+                { key: "NCLC_7_PLUS_sp_o", text: "NCLC 7+", points: 20, icon: "🗣️" } 
+            ],
+            educationLevelsSP: [
+                { key: "none_edu_sp", text: "Aucun / Secondaire non terminé", points: 0, icon: "🚫" },
+                { key: "SEC_SP", text: "Secondaire", points: 5, icon: "🎓" },
+                { key: "POST_SEC_SP_BAC", text: "Post-secondaire / DEC / BAC", points: 10, icon: "📚" }, 
+                { key: "UNIV_MASTER_DOC_SP", text: "Universitaire 2e/3e cycle", points: 20, icon: "🌟" } 
+            ],
+             domaineFormationSP: [ 
+                { 
+                    key: "none_dom_sp", 
+                    text: "Non applicable / Domaine non listé ➕", 
+                    points: 0, icon: "❓",
+                    examplesHTML: `
+                        <h4>Domaine Non Listé ou Non Applicable (Conjoint)</h4>
+                        <p>Si le domaine d'études de votre conjoint(e) ne semble pas correspondre à la catégorie ci-dessous ou si vous n'êtes pas certain.</p>
+                    `
+                },
+                { 
+                    key: "DOM_DEMANDE_SP", 
+                    text: "Domaine en demande (similaire au DP) ➕", 
+                    points: 10, icon: "👍",
+                    examplesHTML: `
+                        <h4>Domaine en Demande (Conjoint) : Exemples indicatifs</h4>
+                        <p>Concerne généralement les mêmes secteurs porteurs que pour le demandeur principal (TI, Génie, Santé, Enseignement, Gestion spécialisée), mais l'impact sur les points est moindre.</p>
+                        <ul>
+                            <li>L'objectif est de démontrer une bonne capacité d'intégration professionnelle du conjoint.</li>
+                        </ul>
+                    `
+                } 
+            ],
+            offreEmploiValidee: [
+                { key: "none_offre", text: "Aucune offre d'emploi validée", points: 0, icon: "🚫" },
+                { key: "OFFRE_CMM", text: "Offre validée DANS la CMM (Montréal)", points: 180, icon: "🏙️" }, 
+                { key: "OFFRE_HORS_CMM", text: "Offre validée HORS de la CMM", points: 380, icon: "🏞️" } 
+            ],
+            familleQC: [ 
+                { key: "none_fam_qc", text: "Non", points: 0, icon: "🚫" },
+                { key: "oui_fam_qc", text: "Oui, famille proche au Québec", points: 20, icon: "👨‍👩‍👧" }
+            ]
+        };
+
+        function toggleAccordionContent(groupId, accordionId) { 
+            const accordionContent = document.getElementById(accordionId);
+            if (!accordionContent) return;
+            const groupElement = document.getElementById(groupId);
+             if (!groupElement) return;
+            const allAccordionsInGroup = groupElement.querySelectorAll('.radio-accordion-content');
+            const isCurrentlyOpen = accordionContent.style.display === 'block';
+            allAccordionsInGroup.forEach(acc => {
+                if (acc.id !== accordionId) { 
+                    acc.style.display = 'none'; 
+                }
+            });
+            if (isCurrentlyOpen) accordionContent.style.display = 'none';
+            else accordionContent.style.display = 'block';
+        }
+        
+        document.addEventListener('click', function(event) { 
+            let targetElement = event.target;
+            let isClickInsideAccordionSystem = false;
+            while (targetElement != null) {
+                if (targetElement.classList && 
+                    (targetElement.classList.contains('radio-accordion-content') || 
+                     targetElement.classList.contains('radio-option') || 
+                     targetElement.classList.contains('radio-option-wrapper'))) {
+                    isClickInsideAccordionSystem = true;
+                    break;
+                }
+                targetElement = targetElement.parentElement;
+            }
+            if (!isClickInsideAccordionSystem) {
+                document.querySelectorAll('.radio-accordion-content').forEach(acc => {
+                    acc.style.display = 'none';
+                });
+            }
+        });
+
+        function populateRadioGroup(groupId, data, groupName, isSingleColumn = false, isMaritalStatus = false) { 
+            const groupElement = document.getElementById(groupId);
+            if (!groupElement) { console.warn("Radio group element not found: " + groupId); return; }
+            if (isSingleColumn) groupElement.classList.add('single-column');
+            if (isMaritalStatus) groupElement.classList.add('two-column-desktop');
+            groupElement.innerHTML = ""; 
+            data.forEach((item, index) => {
+                const optionWrapper = document.createElement('div'); 
+                optionWrapper.className = 'radio-option-wrapper';
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'radio-option';
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.id = `${groupName}_${item.key}`;
+                input.name = groupName;
+                input.value = isMaritalStatus ? item.value.toString() : item.key; // item.value for marital status
+                input.checked = index === 0; 
+                input.onchange = () => { 
+                    if (isMaritalStatus) {
+                        toggleSpouseSection(); 
+                    }
+                    calculatePoints();
+                };
+                const label = document.createElement('label');
+                label.htmlFor = input.id;
+                label.innerHTML = `<span class="radio-icon">${item.icon || "▫️"}</span><span class="radio-text">${item.text}</span>`;
+                if (item.examplesHTML) {
+                    label.setAttribute('data-has-accordion', 'true');
+                    label.addEventListener('click', function(event) {
+                         if (event.target.classList.contains('radio-text') || event.target.classList.contains('radio-icon') || event.target === this) {
+                            if (!input.checked) { 
+                                input.checked = true;
+                                if (isMaritalStatus) toggleSpouseSection(); // Recalculate if marital status changes
+                                calculatePoints(); 
+                            }
+                            toggleAccordionContent(groupId, `${groupName}_${item.key}_accordion`);
+                         }
+                    });
+                }
+                optionDiv.appendChild(input);
+                optionDiv.appendChild(label);
+                optionWrapper.appendChild(optionDiv);
+                if (item.examplesHTML) {
+                    const accordionContentDiv = document.createElement('div');
+                    accordionContentDiv.id = `${groupName}_${item.key}_accordion`;
+                    accordionContentDiv.className = 'radio-accordion-content';
+                    accordionContentDiv.innerHTML = item.examplesHTML;
+                    optionWrapper.appendChild(accordionContentDiv);
+                }
+                groupElement.appendChild(optionWrapper);
+            });
+        }
+
+        function getPointsFromRadio(groupName, dataArray) {  
+            const selectedRadio = document.querySelector(`input[name="${groupName}"]:checked`);
+            if (!selectedRadio) return 0;
+            const selectedValue = selectedRadio.value;
+            const selectedOption = dataArray.find(item => item.key === selectedValue);
+            return selectedOption ? (Number(selectedOption.points) || 0) : 0;
+        }
+        
+        function getNumericInputVal(elementId) { 
+            const inputElement = document.getElementById(elementId);
+            if (!inputElement) { console.warn("Numeric input not found: " + elementId); return 0; }
+            let val = Number(inputElement.value) || 0;
+            if (val < 0) val = 0; 
+            return val;
+        }
+
+        function getArrimaAgePoints(ageInput, isSpouse = false) { 
+            const age = Number(ageInput) || 0; 
+            const ageValidationMsgId = isSpouse ? 'age_validation_message_sp' : 'age_validation_message_dp';
+            const ageValidationMsgEl = document.getElementById(ageValidationMsgId);
+            if(ageValidationMsgEl) ageValidationMsgEl.textContent = '';
+            if (age < 0 || age > 120) { 
+                if(age !== 0 && ageValidationMsgEl) ageValidationMsgEl.textContent = 'Âge invalide (18-120).';
+                return 0;
+            }
+            if (age !==0 && age < 18) { 
+                 if(ageValidationMsgEl) ageValidationMsgEl.textContent = 'L\'âge doit être de 18 ans ou plus.';
+                return 0;
+            }
+            if (age === 0) return 0; 
+            if (isSpouse) { 
+                if (age >= 18 && age <= 35) return 20; 
+                if (age >= 36 && age <= 40) return 10;
+                return 0;
+            } else { 
+                if (age >= 18 && age <= 30) return 130; 
+                if (age === 31) return 124; if (age === 32) return 118;  if (age === 33) return 112;
+                if (age === 34) return 106; if (age === 35) return 100;
+                if (age === 36) return 88;  if (age === 37) return 76;  if (age === 38) return 64;
+                if (age === 39) return 52;  if (age === 40) return 40;
+                if (age === 41) return 26;  if (age === 42) return 13;
+                if (age >= 43) return 0;
+                return 0; 
+            }
+        }
+
+        function toggleSpouseSection() {
+            const maritalStatusRadio = document.querySelector('input[name="marital_status_radio"]:checked');
+            const applyingWithSpouse = maritalStatusRadio ? (maritalStatusRadio.value === 'true') : false; 
+            document.getElementById('spouse_section_wrapper').style.display = applyingWithSpouse ? 'block' : 'none';
+             if (!applyingWithSpouse) { 
+                const spouseInputsToReset = document.querySelectorAll('#spouse_section input[type="radio"]');
+                spouseInputsToReset.forEach(radio => {
+                    const firstRadioInGroup = document.querySelector(`input[name="${radio.name}"]`);
+                    if (firstRadioInGroup) firstRadioInGroup.checked = true;
+                });
+                const spouseNumberInputs = document.querySelectorAll('#spouse_section input[type="number"]');
+                spouseNumberInputs.forEach(numInput => numInput.value = 0);
+             }
+        }
+        
+        function updatePointsDisplay(elementId, points) {  
+            const display = document.getElementById(elementId);
+            if (display) display.innerText = "Points: " + (Number(points) || 0);
+        }
+
+        function calculatePoints() { 
+            const maritalStatusRadio = document.querySelector('input[name="marital_status_radio"]:checked');
+            const isWithSpouse = maritalStatusRadio ? (maritalStatusRadio.value === 'true') : false; 
+            let totalArrimaScore = 0;
+
+            const getSanitizedRadioPoints = (groupName, dataArr) => Number(getPointsFromRadio(groupName, dataArr)) || 0;
+            const getSanitizedAgePoints = (elId, isSp) => Number(getArrimaAgePoints(getNumericInputVal(elId), isSp)) || 0;
+
+            let dp_score_capital_humain = 0;
+            dp_score_capital_humain += getSanitizedRadioPoints('fr_co_radio_dp', D_ARRIMA.frLangLevelsDP_Oral);
+            dp_score_capital_humain += getSanitizedRadioPoints('fr_po_radio_dp', D_ARRIMA.frLangLevelsDP_Oral);
+            dp_score_capital_humain += getSanitizedRadioPoints('fr_ce_radio_dp', D_ARRIMA.frLangLevelsDP_Ecrit);
+            dp_score_capital_humain += getSanitizedRadioPoints('fr_pe_radio_dp', D_ARRIMA.frLangLevelsDP_Ecrit);
+            dp_score_capital_humain += getSanitizedRadioPoints('en_co_radio_dp', D_ARRIMA.enLangLevelsDP);
+            dp_score_capital_humain += getSanitizedRadioPoints('en_po_radio_dp', D_ARRIMA.enLangLevelsDP);
+            dp_score_capital_humain += getSanitizedRadioPoints('en_ce_radio_dp', D_ARRIMA.enLangLevelsDP); 
+            dp_score_capital_humain += getSanitizedRadioPoints('en_pe_radio_dp', D_ARRIMA.enLangLevelsDP);
+            dp_score_capital_humain += getSanitizedAgePoints('age_dp', false);
+            dp_score_capital_humain += getSanitizedRadioPoints('education_radio_dp', D_ARRIMA.educationLevelsDP);
+            dp_score_capital_humain += getSanitizedRadioPoints('domaine_formation_radio_dp', D_ARRIMA.domaineFormationDP);
+            dp_score_capital_humain += getSanitizedRadioPoints('experience_radio_dp', D_ARRIMA.experienceLevelsDP);
+            totalArrimaScore += dp_score_capital_humain;
+
+            updatePointsDisplay('fr_co_points_dp', getSanitizedRadioPoints('fr_co_radio_dp', D_ARRIMA.frLangLevelsDP_Oral));
+            updatePointsDisplay('fr_po_points_dp', getSanitizedRadioPoints('fr_po_radio_dp', D_ARRIMA.frLangLevelsDP_Oral));
+            updatePointsDisplay('fr_ce_points_dp', getSanitizedRadioPoints('fr_ce_radio_dp', D_ARRIMA.frLangLevelsDP_Ecrit));
+            updatePointsDisplay('fr_pe_points_dp', getSanitizedRadioPoints('fr_pe_radio_dp', D_ARRIMA.frLangLevelsDP_Ecrit));
+            updatePointsDisplay('en_co_points_dp', getSanitizedRadioPoints('en_co_radio_dp', D_ARRIMA.enLangLevelsDP));
+            updatePointsDisplay('en_po_points_dp', getSanitizedRadioPoints('en_po_radio_dp', D_ARRIMA.enLangLevelsDP));
+            updatePointsDisplay('en_ce_points_dp', getSanitizedRadioPoints('en_ce_radio_dp', D_ARRIMA.enLangLevelsDP));
+            updatePointsDisplay('en_pe_points_dp', getSanitizedRadioPoints('en_pe_radio_dp', D_ARRIMA.enLangLevelsDP));
+            updatePointsDisplay('age_points_dp', getSanitizedAgePoints('age_dp', false));
+            updatePointsDisplay('education_points_dp', getSanitizedRadioPoints('education_radio_dp', D_ARRIMA.educationLevelsDP));
+            updatePointsDisplay('domaine_formation_points_dp', getSanitizedRadioPoints('domaine_formation_radio_dp', D_ARRIMA.domaineFormationDP));
+            updatePointsDisplay('experience_points_dp', getSanitizedRadioPoints('experience_radio_dp', D_ARRIMA.experienceLevelsDP));
+            
+            let dp_score_marche_qc = 0;
+            dp_score_marche_qc += getSanitizedRadioPoints('diplome_qc_radio_dp', D_ARRIMA.diplomeQC_DP);
+            dp_score_marche_qc += getSanitizedRadioPoints('experience_qc_radio_dp', D_ARRIMA.experienceQC_DP);
+            totalArrimaScore += dp_score_marche_qc;
+            updatePointsDisplay('diplome_qc_points_dp', getSanitizedRadioPoints('diplome_qc_radio_dp', D_ARRIMA.diplomeQC_DP));
+            updatePointsDisplay('experience_qc_points_dp', getSanitizedRadioPoints('experience_qc_radio_dp', D_ARRIMA.experienceQC_DP));
+
+            let sp_score = 0;
+            if (isWithSpouse) {
+                sp_score += getSanitizedRadioPoints('fr_co_radio_sp', D_ARRIMA.frLangLevelsSP_Oral);
+                sp_score += getSanitizedRadioPoints('fr_po_radio_sp', D_ARRIMA.frLangLevelsSP_Oral);
+                sp_score += getSanitizedAgePoints('age_sp', true);
+                sp_score += getSanitizedRadioPoints('education_radio_sp', D_ARRIMA.educationLevelsSP);
+                sp_score += getSanitizedRadioPoints('domaine_formation_radio_sp', D_ARRIMA.domaineFormationSP);
+                totalArrimaScore += sp_score;
+                updatePointsDisplay('fr_co_points_sp', getSanitizedRadioPoints('fr_co_radio_sp', D_ARRIMA.frLangLevelsSP_Oral));
+                updatePointsDisplay('fr_po_points_sp', getSanitizedRadioPoints('fr_po_radio_sp', D_ARRIMA.frLangLevelsSP_Oral));
+                updatePointsDisplay('age_points_sp', getSanitizedAgePoints('age_sp', true));
+                updatePointsDisplay('education_points_sp', getSanitizedRadioPoints('education_radio_sp', D_ARRIMA.educationLevelsSP));
+                updatePointsDisplay('domaine_formation_points_sp', getSanitizedRadioPoints('domaine_formation_radio_sp', D_ARRIMA.domaineFormationSP));
+            } else { 
+                 const spousePointDisplays = ['fr_co_points_sp', 'fr_po_points_sp', 'age_points_sp', 'education_points_sp', 'domaine_formation_points_sp'];
+                 spousePointDisplays.forEach(id => updatePointsDisplay(id, 0));
+            }
+
+            let offre_emploi_pts = getSanitizedRadioPoints('offre_emploi_radio', D_ARRIMA.offreEmploiValidee);
+            updatePointsDisplay('offre_emploi_points', offre_emploi_pts); 
+            let score_sans_offre_emploi = totalArrimaScore; 
+            
+            let enfants_total_val = getNumericInputVal('enfants_total');
+            let enfants_pts = 0;
+            if (enfants_total_val === 1) enfants_pts = 30; 
+            else if (enfants_total_val >= 2) enfants_pts = 55; 
+            updatePointsDisplay('enfants_points', enfants_pts); 
+            score_sans_offre_emploi += enfants_pts; 
+
+            let famille_qc_pts = getSanitizedRadioPoints('famille_qc_radio', D_ARRIMA.familleQC);
+            updatePointsDisplay('famille_qc_points', famille_qc_pts); 
+            score_sans_offre_emploi += famille_qc_pts; 
+
+            totalArrimaScore = score_sans_offre_emploi + offre_emploi_pts; 
+            
+            document.getElementById('autonomie_financiere_points_display').innerText = 
+                document.getElementById('autonomie_financiere_checkbox').checked ? "Exigence Comprise" : "Doit être comprise";
+
+            totalArrimaScore = Math.round(totalArrimaScore); 
+            document.getElementById('arrima_total_score_display_pdf').innerText = `Score Total Estimé : ${totalArrimaScore} points`; 
+            document.querySelector('.arrima-score-display').innerText = `Score Total Estimé : ${totalArrimaScore} points`; 
+            
+            const interpretationNoJobOfferDiv = document.getElementById('interpretation_no_job_offer_text_pdf');
+            const interpretationWithJobOfferDiv = document.getElementById('interpretation_with_job_offer_text_pdf');
+            const introNoJobEl = document.getElementById('interpretation_intro_no_job_offer_pdf');
+            const adviceNoJobEl = document.getElementById('interpretation_advice_list_no_job_offer_pdf');
+            const perspectiveWithJobEl = document.getElementById('interpretation_perspective_with_job_offer_pdf');
+            const introWithJobEl = document.getElementById('interpretation_intro_with_job_offer_pdf');
+            const autonomyReminderElPDF = document.getElementById('autonomy_reminder_pdf');
+
+            introNoJobEl.innerHTML = ""; adviceNoJobEl.innerHTML = "";
+            perspectiveWithJobEl.innerHTML = ""; introWithJobEl.innerHTML = "";
+            autonomyReminderElPDF.style.display = 'none';
+
+
+            let stickyOverallStatusText = "Amélioration Nécessaire";
+            let stickyOverallStatusClass = 'status-low';
+            let resultsBgColor = '#fdecea'; 
+
+            const typicalLowInvitationScore = 570; 
+            const typicalMidInvitationScore = 595; 
+            const typicalHighInvitationScore = 620;
+            const scoreForJobOfferPerspective = 450; 
+
+            if (offre_emploi_pts > 0) {
+                interpretationNoJobOfferDiv.style.display = 'none';
+                interpretationWithJobOfferDiv.style.display = 'block';
+                introWithJobEl.innerHTML = `Avec une offre d'emploi validée et un score total de ${totalArrimaScore} points (score de base sans offre: ${score_sans_offre_emploi}), vos chances d'invitation sont <strong>TRÈS ÉLEVÉES</strong>. Les candidats avec une offre d'emploi validée sont souvent priorisés, surtout si elle est hors de la CMM. Assurez-vous que votre offre est bien validée par le MIFI.`;
+                stickyOverallStatusText = "Excellent (Offre Emploi)";
+                stickyOverallStatusClass = 'status-high';
+                resultsBgColor = '#e6f9ee';
+            } else {
+                interpretationNoJobOfferDiv.style.display = 'block';
+                interpretationWithJobOfferDiv.style.display = 'none';
+                let tempAdvice = "";
+
+                if (score_sans_offre_emploi >= typicalHighInvitationScore) {
+                    introNoJobEl.innerHTML = `Félicitations ! Votre score estimé de ${score_sans_offre_emploi} points (sans offre d'emploi) est <strong>EXCELLENT</strong>. Vous vous placez parmi les candidats très compétitifs pour les tirages généraux basés sur le profil.`;
+                    tempAdvice += "<li>Assurez-vous que toutes vos informations sont exactes et vos documents prêts.</li><li>Continuez à surveiller les rondes d'invitation.</li>";
+                    stickyOverallStatusText = "Score Très Compétitif";
+                    stickyOverallStatusClass = 'status-high';
+                    resultsBgColor = '#e6f9ee';
+                } else if (score_sans_offre_emploi >= typicalMidInvitationScore) {
+                    introNoJobEl.innerHTML = `Votre score estimé de ${score_sans_offre_emploi} points (sans offre d'emploi) est <strong>BON et COMPÉTITIF</strong>. Vous êtes dans une zone où des invitations pour profils généraux ont été observées.`;
+                    tempAdvice += "<li>Toute amélioration (ex: français, expérience ciblée) est un plus.</li>";
+                    stickyOverallStatusText = "Score Compétitif";
+                    stickyOverallStatusClass = 'status-medium';
+                    resultsBgColor = '#fff9e6';
+                } else if (score_sans_offre_emploi >= typicalLowInvitationScore) {
+                    introNoJobEl.innerHTML = `Votre score estimé de ${score_sans_offre_emploi} points (sans offre d'emploi) est <strong>PROMETTEUR</strong> mais pourrait nécessiter quelques améliorations pour atteindre solidement les seuils d'invitation les plus courants pour les profils généraux.`;
+                    tempAdvice += "<li>Concentrez-vous sur l'amélioration de votre niveau de français (NCLC 7+ à l'oral ET à l'écrit est crucial).</li><li>Vérifiez si votre domaine de formation et expérience sont en forte demande.</li>";
+                    stickyOverallStatusText = "Potentiel Intéressant";
+                    stickyOverallStatusClass = 'status-medium'; 
+                    resultsBgColor = '#fff9e6';
+                } else {
+                    introNoJobEl.innerHTML = `Votre score estimé de ${score_sans_offre_emploi} points (sans offre d'emploi) est actuellement <strong>inférieur</strong> aux seuils d'invitation généralement observés pour les profils généraux. Des améliorations significatives sont nécessaires.`;
+                    tempAdvice += "<li><strong>Priorité #1 : Français.</strong> Visez NCLC 7+ à l'oral ET à l'écrit.</li><li>Si possible, explorez des études ou une expérience de travail qualifiée au Québec.</li>";
+                }
+                if (score_sans_offre_emploi + 180 >= scoreForJobOfferPerspective ) { 
+                     perspectiveWithJobEl.innerHTML = `<strong>Perspective avec Offre d'Emploi :</strong> Notez qu'une offre d'emploi validée par le MIFI augmente considérablement vos chances (ajoutant entre 180 et 380 points). Si vous obteniez une telle offre, votre profil deviendrait hautement compétitif pour les tirages ciblant ce critère. Votre score total pourrait alors atteindre environ <strong>${score_sans_offre_emploi + 180} à ${score_sans_offre_emploi + 380} points</strong>.`;
+                } else {
+                    perspectiveWithJobEl.innerHTML = `<strong>Perspective avec Offre d'Emploi :</strong> L'obtention d'une offre d'emploi validée par le MIFI est le facteur le plus puissant pour augmenter vos chances (ajoutant entre 180 et 380 points). Même si votre score actuel est bas, une offre peut changer radicalement la donne et vous rendre compétitif (score potentiel : <strong>${score_sans_offre_emploi + 180} à ${score_sans_offre_emploi + 380} points</strong>).`;
+                }
+                 adviceNoJobEl.innerHTML = tempAdvice;
+            }
+            
+            const resultsSectionForPDF = document.getElementById('results_summary_section_capture_pdf');
+            resultsSectionForPDF.style.backgroundColor = resultsBgColor; 
+            resultsSectionForPDF.style.borderLeftColor = 
+                stickyOverallStatusClass === 'status-high' ? 'var(--success-color)' :
+                stickyOverallStatusClass === 'status-medium' ? 'var(--accent-color)' : 'var(--error-color)';
+             // Ensure border style is applied for PDF capture as well
+            resultsSectionForPDF.style.borderLeftWidth = '5px';
+            resultsSectionForPDF.style.borderLeftStyle = 'solid';
+
+
+            // Update visible results section on the page
+            const visibleResultsSection = document.querySelector('.results-summary-section:not(#results_summary_section_capture_pdf)'); 
+             if(visibleResultsSection) {
+                visibleResultsSection.style.backgroundColor = resultsBgColor;
+                visibleResultsSection.style.borderLeftColor = resultsSectionForPDF.style.borderLeftColor;
+                visibleResultsSection.style.borderLeftWidth = '5px';
+                visibleResultsSection.style.borderLeftStyle = 'solid';
+                
+                const visibleIntroNoJob = visibleResultsSection.querySelector('#interpretation_no_job_offer_text_pdf'); // Actually target visible elements
+                const visibleAdviceNoJob = visibleResultsSection.querySelector('#interpretation_advice_list_no_job_offer_pdf');
+                const visiblePerspective = visibleResultsSection.querySelector('#interpretation_perspective_with_job_offer_pdf');
+                const visibleIntroWithJob = visibleResultsSection.querySelector('#interpretation_with_job_offer_text_pdf');
+                const visibleAutonomyReminder = visibleResultsSection.querySelector('#autonomy_reminder_pdf');
+
+
+                if (offre_emploi_pts > 0) {
+                    if(visibleIntroWithJob) visibleIntroWithJob.innerHTML = introWithJobEl.innerHTML;
+                    if(visibleIntroNoJob) visibleIntroNoJob.style.display = 'none';
+                    if(visibleIntroWithJob) visibleIntroWithJob.style.display = 'block';
+                } else {
+                    if(visibleIntroNoJob) visibleIntroNoJob.innerHTML = introNoJobEl.innerHTML;
+                    if(visibleAdviceNoJob) visibleAdviceNoJob.innerHTML = adviceNoJobEl.innerHTML;
+                    if(visiblePerspective) visiblePerspective.innerHTML = perspectiveWithJobEl.innerHTML;
+                    if(visibleIntroNoJob) visibleIntroNoJob.style.display = 'block';
+                    if(visibleIntroWithJob) visibleIntroWithJob.style.display = 'none';
+                }
+                 if (!document.getElementById('autonomie_financiere_checkbox').checked) {
+                    if(visibleAutonomyReminder) {
+                        visibleAutonomyReminder.style.display = 'block';
+                    }
+                    autonomyReminderElPDF.style.display = 'block'; // For PDF
+                } else {
+                    if(visibleAutonomyReminder) visibleAutonomyReminder.style.display = 'none';
+                    autonomyReminderElPDF.style.display = 'none'; // For PDF
+                }
+            }
+
+            document.getElementById('sticky_arrima_score').innerHTML = `Score Arrima: ${totalArrimaScore}`;
+            const stickyOverallStatusEl = document.getElementById('sticky_overall_status');
+            stickyOverallStatusEl.textContent = stickyOverallStatusText;
+            stickyOverallStatusEl.className = stickyOverallStatusClass;
+
+            const tierBar = document.getElementById('compact_score_tier_bar');
+            const MAX_ARRIMA_SCORE_FOR_BAR = 750; 
+            const tierPercentage = MAX_ARRIMA_SCORE_FOR_BAR > 0 ? Math.min(100, (totalArrimaScore / MAX_ARRIMA_SCORE_FOR_BAR) * 100) : 0;
+            tierBar.style.width = tierPercentage + '%';
+            
+            if (stickyOverallStatusClass === 'status-high') tierBar.style.backgroundColor = 'var(--success-color)';
+            else if (stickyOverallStatusClass === 'status-medium') tierBar.style.backgroundColor = 'var(--accent-color)';
+            else tierBar.style.backgroundColor = 'var(--error-color)';
+        }
+
+        function getSelectedTextFromRadio(groupName) { 
+            const selectedRadio = document.querySelector(`input[name="${groupName}"]:checked`);
+            if (selectedRadio) {
+                const label = document.querySelector(`label[for="${selectedRadio.id}"] .radio-text`);
+                if (label) {
+                    return label.textContent.replace(/➕/g, '').trim();
+                }
+            }
+            return "Non spécifié";
+        }
+
+        function generatePDF() { 
+            const { jsPDF } = window.jspdf;
+            const pdfStatus = document.getElementById('pdf_generation_status');
+            pdfStatus.textContent = "Génération du PDF en cours...";
+
+            const resultsSectionToCapture = document.getElementById('results_summary_section_capture_pdf');
+            
+            html2canvas(resultsSectionToCapture, { scale: 2, useCORS: true, backgroundColor: null }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF({
+                    orientation: 'landscape', 
+                    unit: 'mm',
+                    format: 'a4' 
+                });
+
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                const margin = 10; 
+
+                const imgProps= pdf.getImageProperties(imgData);
+                const canvasAspectRatio = imgProps.width / imgProps.height;
+                let imgInPdfWidth = pdfWidth - 2 * margin;
+                let imgInPdfHeight = imgInPdfWidth / canvasAspectRatio;
+
+                if (imgInPdfHeight > pdfHeight - 2 * margin) {
+                    imgInPdfHeight = pdfHeight - 2 * margin;
+                    imgInPdfWidth = imgInPdfHeight * canvasAspectRatio;
+                }
+                const x = (pdfWidth - imgInPdfWidth) / 2;
+                const y = (pdfHeight - imgInPdfHeight) / 2;
+
+                pdf.addImage(imgData, 'PNG', x, y, imgInPdfWidth, imgInPdfHeight);
+                
+                const pageCount = pdf.internal.getNumberOfPages();
+                for(let i = 1; i <= pageCount; i++) {
+                    pdf.setPage(i);
+                    pdf.setFontSize(8);
+                    pdf.setTextColor(100);
+                    pdf.text(`Récapitulatif J'arrive Québec - Simulateur Arrima (Estimation) - Page ${i} de ${pageCount}`, pdfWidth / 2, pdfHeight - 5, { align: 'center' });
+                }
+
+                pdf.save('Recapitulatif_Simulation_Arrima_JarriveQuebec.pdf');
+                pdfStatus.textContent = "PDF généré !";
+                setTimeout(() => { pdfStatus.textContent = ""; }, 3000);
+            }).catch(error => {
+                console.error("Erreur lors de la génération du PDF:", error);
+                pdfStatus.textContent = "Erreur lors de la génération.";
+            });
+        }
+
+        window.onload = () => {
+            populateRadioGroup('marital_status_radiogroup', D_ARRIMA.maritalStatus, 'marital_status_radio', false, true); 
+            populateRadioGroup('fr_co_radiogroup_dp', D_ARRIMA.frLangLevelsDP_Oral, 'fr_co_radio_dp');
+            populateRadioGroup('fr_po_radiogroup_dp', D_ARRIMA.frLangLevelsDP_Oral, 'fr_po_radio_dp');
+            populateRadioGroup('fr_ce_radiogroup_dp', D_ARRIMA.frLangLevelsDP_Ecrit, 'fr_ce_radio_dp', true);
+            populateRadioGroup('fr_pe_radiogroup_dp', D_ARRIMA.frLangLevelsDP_Ecrit, 'fr_pe_radio_dp', true);
+            populateRadioGroup('en_co_radiogroup_dp', D_ARRIMA.enLangLevelsDP, 'en_co_radio_dp');
+            populateRadioGroup('en_po_radiogroup_dp', D_ARRIMA.enLangLevelsDP, 'en_po_radio_dp');
+            populateRadioGroup('en_ce_radiogroup_dp', D_ARRIMA.enLangLevelsDP, 'en_ce_radio_dp', true);
+            populateRadioGroup('en_pe_radiogroup_dp', D_ARRIMA.enLangLevelsDP, 'en_pe_radio_dp', true);
+            populateRadioGroup('education_radiogroup_dp', D_ARRIMA.educationLevelsDP, 'education_radio_dp');
+            populateRadioGroup('domaine_formation_radiogroup_dp', D_ARRIMA.domaineFormationDP, 'domaine_formation_radio_dp');
+            populateRadioGroup('experience_radiogroup_dp', D_ARRIMA.experienceLevelsDP, 'experience_radio_dp');
+            populateRadioGroup('diplome_qc_radiogroup_dp', D_ARRIMA.diplomeQC_DP, 'diplome_qc_radio_dp', true);
+            populateRadioGroup('experience_qc_radiogroup_dp', D_ARRIMA.experienceQC_DP, 'experience_qc_radio_dp', true);
+            
+            populateRadioGroup('fr_co_radiogroup_sp', D_ARRIMA.frLangLevelsSP_Oral, 'fr_co_radio_sp');
+            populateRadioGroup('fr_po_radiogroup_sp', D_ARRIMA.frLangLevelsSP_Oral, 'fr_po_radio_sp');
+            populateRadioGroup('education_radiogroup_sp', D_ARRIMA.educationLevelsSP, 'education_radio_sp');
+            populateRadioGroup('domaine_formation_radiogroup_sp', D_ARRIMA.domaineFormationSP, 'domaine_formation_radio_sp');
+
+            populateRadioGroup('offre_emploi_radiogroup', D_ARRIMA.offreEmploiValidee, 'offre_emploi_radio', true);
+            populateRadioGroup('famille_qc_radiogroup', D_ARRIMA.familleQC, 'famille_qc_radio', true);
+
+            toggleSpouseSection(); 
+            calculatePoints();
+        };
+    </script>
+</body>
+</html>
