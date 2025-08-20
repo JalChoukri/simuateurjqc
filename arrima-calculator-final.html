@@ -1,0 +1,3904 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<title>Calculateur Arrima PSTQ 2025</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+  min-height: 100vh;
+}
+
+.disclaimer-screen {
+  min-height: 100vh;
+  background: #f3f4f6;
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1rem 1rem 1rem; /* More top padding, no vertical centering */
+  align-items: flex-start; /* Align to top */
+}
+
+.disclaimer-container {
+  width: 100%;
+  max-width: 64rem;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.disclaimer-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.disclaimer-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.warning-icon {
+  height: 2rem;
+  width: 2rem;
+  color: #dc2626;
+  margin-right: 0.75rem;
+}
+
+.disclaimer-title-row h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #dc2626;
+}
+
+.disclaimer-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.disclaimer-divider {
+  width: 6rem;
+  height: 0.25rem;
+  background: #2563eb;
+  margin: 0 auto;
+  border-radius: 0.125rem;
+}
+
+.disclaimer-content {
+  background: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid #fbbf24;
+}
+
+.disclaimer-text {
+  color: #374151;
+  line-height: 1.75;
+}
+
+.disclaimer-text p {
+  margin-bottom: 1rem;
+}
+
+.disclaimer-text a {
+  color: #2563eb;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.warning-text {
+  font-weight: bold;
+  color: #b91c1c !important;
+}
+
+.final-note {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.disclaimer-actions {
+  margin-bottom: 2rem;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.disclaimer-checkbox {
+  margin-top: 0.25rem;
+  height: 1.25rem;
+  width: 1.25rem;
+  color: #2563eb;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+}
+
+.checkbox-container label {
+  color: #374151;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.accept-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.accept-button:enabled {
+  background: #2563eb;
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.accept-button:enabled:hover {
+  background: #1d4ed8;
+}
+
+.accept-button:disabled {
+  background: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.disclaimer-footer {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.main-app {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1rem;
+  background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+  box-sizing: border-box;
+}
+
+.fixed-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 0.5rem;
+}
+
+.desktop-nav {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  height: 4rem;
+  padding: 0.5rem 0;
+}
+
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 64rem;
+}
+
+.nav-button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  height: 2.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: transparent;
+  color: #6b7280;
+}
+
+.nav-button:hover {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.nav-button.active {
+  background: #2563eb;
+  color: white;
+}
+
+.nav-button.results-button {
+  background: #16a34a;
+  color: white;
+}
+
+.nav-button.results-button:hover {
+  background: #15803d;
+}
+
+.nav-button.results-button.active {
+  background: #15803d;
+}
+
+.mobile-nav {
+  display: block;
+  padding: 0.75rem 0;
+}
+
+.mobile-nav-scroll {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding: 0 0.5rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.mobile-nav-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-nav-button {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  border: 2px solid #e5e7eb;
+  background: white;
+  color: #6b7280;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 8.75rem;
+  white-space: nowrap;
+}
+
+.mobile-nav-button:hover {
+  border-color: #93c5fd;
+  color: #2563eb;
+}
+
+.mobile-nav-button.active {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+.mobile-nav-button.results-button {
+  background: #16a34a;
+  color: white;
+  border-color: #16a34a;
+}
+
+.mobile-nav-button.results-button:hover {
+  background: #15803d;
+}
+
+.mobile-nav-button.results-button.active {
+  background: #15803d;
+}
+
+.main-content {
+  width: 100%;
+  max-width: 64rem;
+  margin-top: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-pages {
+  padding: 1rem 0.5rem 2rem;
+}
+
+.form-container {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.header-card {
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+}
+
+.header-content {
+  text-align: center;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.header-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.header-subtitle {
+  color: #bfdbfe;
+  font-size: 0.875rem;
+}
+
+.form-card {
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.form-header {
+  padding: 1rem 1.5rem;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.section-icon {
+  font-size: 1.5rem;
+}
+
+.progress-bar {
+  width: 100%;
+  background: #e5e7eb;
+  border-radius: 9999px;
+  height: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  background: #2563eb;
+  height: 0.5rem;
+  border-radius: 9999px;
+  transition: width 0.3s;
+  width: 16.67%;
+}
+
+.progress-text {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.form-content {
+  padding: 1rem 1.5rem;
+}
+
+.form-section {
+  display: none;
+}
+
+.form-section.active {
+  display: block;
+}
+
+.section-group {
+  margin-bottom: 2rem;
+}
+
+.group-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #2563eb;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.separator {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 2rem 0;
+}
+
+.alert {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.alert.info {
+  background: #dbeafe;
+  border: 1px solid #93c5fd;
+  color: #1e40af;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #374151;
+  font-size: 1rem;
+}
+
+.form-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  background: white;
+}
+
+.form-select:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.radio-input {
+  margin: 0;
+}
+
+.radio-text {
+  font-size: 1rem;
+}
+
+.no-spouse-content {
+  text-align: center;
+  padding: 2rem;
+}
+
+.no-spouse-icon {
+  font-size: 3.75rem;
+  margin-bottom: 1rem;
+}
+
+.no-spouse-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.no-spouse-text {
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.no-spouse-note {
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+.form-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  width: 100%;
+}
+
+.nav-btn.primary {
+  background: #2563eb;
+  color: white;
+}
+
+.nav-btn.primary:hover {
+  background: #1d4ed8;
+}
+
+.nav-btn.secondary {
+  background: transparent;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.nav-btn.secondary:hover {
+  background: #f9fafb;
+}
+
+.nav-btn.secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nav-btn.calculate {
+  background: #16a34a;
+  color: white;
+}
+
+.nav-btn.calculate:hover {
+  background: #15803d;
+}
+
+.results-page {
+  padding: 2rem 1rem;
+}
+
+.results-container {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.results-card {
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.results-header {
+  text-align: center;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.results-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.results-subtitle {
+  color: #bfdbfe;
+  font-size: 1.125rem;
+}
+
+.results-content {
+  padding: 2rem;
+}
+
+.score-display {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.total-score {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.score-subtitle {
+  color: #6b7280;
+}
+
+.breakdown-container {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+
+.breakdown-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.breakdown-section {
+  margin-bottom: 1rem;
+}
+
+.breakdown-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.breakdown-title.linguistic {
+  color: #2563eb;
+}
+
+.breakdown-title.quebec {
+  color: #ea580c;
+}
+
+.breakdown-title.capital {
+  color: #7c3aed;
+}
+
+.breakdown-title.additional {
+  color: #16a34a;
+}
+
+.breakdown-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.breakdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.breakdown-item.total {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 0.5rem;
+  font-weight: 600;
+}
+
+.breakdown-value {
+  font-weight: 500;
+}
+
+.total-value {
+  color: #2563eb;
+}
+
+.spouse-breakdown {
+  margin-top: 0.5rem;
+}
+
+.results-actions {
+  max-width: 64rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  width: 100%;
+}
+
+.action-button.primary {
+  background: #2563eb;
+  color: white;
+}
+
+.action-button.primary:hover {
+  background: #1d4ed8;
+}
+
+.action-button.secondary {
+  background: transparent;
+  color: #1f2937;
+  border: 1px solid #1f2937;
+}
+
+.action-button.secondary:hover {
+  background: #f9fafb;
+}
+
+.lead-magnet-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.lead-magnet-content {
+  padding: 2rem;
+}
+
+.lead-magnet-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.lead-magnet-header h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.lead-magnet-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.lead-magnet-image-mobile {
+  display: block;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.lead-magnet-image-mobile img {
+  max-width: 200px;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+  background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+  padding: 2rem;
+}
+
+.lead-magnet-image-desktop {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+  padding: 2rem;
+  border-radius: 0.5rem;
+}
+
+.lead-magnet-image-desktop img {
+  max-width: 200px;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+}
+
+.lead-magnet-form {
+  width: 100%;
+}
+
+.guide-title h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.guide-description {
+  color: #6b7280;
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+.email-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.checkbox-input {
+  margin-top: 0.25rem;
+  border-radius: 0.25rem;
+  height: 1rem;
+  width: 1rem;
+  flex-shrink: 0;
+}
+
+.checkbox-text {
+  font-size: 0.875rem;
+  line-height: 1.75;
+}
+
+.link {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.submit-button {
+  width: 100%;
+  background: #16a34a;
+  color: white;
+  padding: 1rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+  background: #15803d;
+}
+
+/* Success Message Styles */
+.success-message {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.success-message p:first-child {
+  margin-top: 0;
+}
+
+.success-message p:last-child {
+  margin-bottom: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.disclaimer-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: #fef3c7;
+  border: 1px solid #f59e0b;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+.alert-icon {
+  height: 1rem;
+  width: 1rem;
+  color: #d97706;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.alert-content {
+  color: #92400e;
+}
+
+.alert-content p {
+  text-align: center;
+}
+
+.alert-link {
+  color: #2563eb;
+  text-decoration: underline;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+@media (min-width: 640px) {
+  .action-buttons {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .action-button {
+    width: auto;
+  }
+
+  .form-footer {
+    flex-direction: row;
+  }
+
+  .nav-btn {
+    width: auto;
+  }
+
+  .header-title {
+    font-size: 1.5rem;
+  }
+
+  .header-subtitle {
+    font-size: 1rem;
+  }
+
+  .form-pages {
+    padding: 2rem 1rem;
+  }
+
+  .header-card {
+    margin-bottom: 2rem;
+  }
+
+  .header-content {
+    padding: 1.5rem;
+  }
+
+  .form-header {
+    padding: 1.5rem;
+  }
+
+  .form-content {
+    padding: 1.5rem;
+  }
+
+  .form-footer {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .breakdown-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .results-title {
+    font-size: 1.875rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .desktop-nav {
+    display: flex;
+  }
+
+  .mobile-nav {
+    display: none;
+  }
+
+  .main-content {
+    padding-top: 4rem;
+  }
+
+  .header-title {
+    font-size: 1.875rem;
+  }
+
+  .header-subtitle {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .lead-magnet-body {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  
+  .lead-magnet-image-mobile {
+    display: block;
+  }
+  
+  .lead-magnet-image-desktop {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .lead-magnet-image-mobile {
+    display: none;
+  }
+  
+  .lead-magnet-image-desktop {
+    display: flex;
+  }
+}
+
+/* Exit Intent Popup Styles - REMOVED */
+
+.exit-intent-btn-primary {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: white;
+}
+
+.exit-intent-btn-primary:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
+}
+
+.exit-intent-btn-secondary {
+  background: #f3f4f6;
+  color: #374151;
+  border: 2px solid #e5e7eb;
+}
+
+.exit-intent-btn-secondary:hover {
+  background: #e5e7eb;
+  color: #1f2937;
+}
+
+.exit-intent-form {
+  padding: 0 2rem 2rem;
+}
+
+.exit-intent-form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.exit-intent-form-header h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.exit-intent-form-header p {
+  color: #6b7280;
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+}
+
+.exit-intent-form-header ul {
+  text-align: left;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.exit-intent-form-header li {
+  color: #374151;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  background: #f9fafb;
+  border-radius: 0.375rem;
+  border-left: 4px solid #2563eb;
+}
+
+.bundle-email-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .exit-intent-modal {
+    width: 95%;
+    max-width: 95%;
+  }
+  
+  .exit-intent-content,
+  .exit-intent-form {
+    padding: 0 1.5rem 1.5rem;
+  }
+  
+  .exit-intent-buttons {
+    gap: 0.75rem;
+  }
+  
+  .exit-intent-btn {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Floating Lead Bar Styles */
+.floating-lead-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: white;
+  padding: 1rem;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.floating-lead-bar.show {
+  transform: translateY(0);
+}
+
+.floating-lead-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 64rem;
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+.floating-lead-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.floating-lead-icon {
+  font-size: 1.25rem;
+}
+
+.floating-lead-btn {
+  background: #fbbf24;
+  color: #1f2937;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.floating-lead-btn:hover {
+  background: #f59e0b;
+  transform: translateY(-1px);
+}
+
+/* Floating Lead Modal */
+.floating-lead-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  backdrop-filter: blur(4px);
+}
+
+.floating-lead-modal.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-lead-modal-content {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 32rem;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.floating-lead-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #6b7280;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  transition: background 0.2s ease;
+}
+
+.floating-lead-close:hover {
+  background: #f3f4f6;
+}
+
+.floating-lead-modal-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.floating-lead-modal-header h3 {
+  color: #1f2937;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.floating-lead-modal-header p {
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.floating-lead-modal-header ul {
+  text-align: left;
+  list-style: none;
+  padding: 0;
+}
+
+.floating-lead-modal-header li {
+  padding: 0.5rem 0;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.floating-lead-modal-header li:last-child {
+  border-bottom: none;
+}
+
+.floating-lead-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.floating-lead-form .form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.floating-lead-form .form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.floating-lead-form .form-input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.floating-lead-form .submit-button {
+  width: 100%;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.floating-lead-form .submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .floating-lead-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .floating-lead-btn {
+    width: 100%;
+  }
+  
+  .floating-lead-modal-content {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}
+
+/* Midway Lead Modal Styles */
+.midway-lead-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  backdrop-filter: blur(4px);
+}
+
+.midway-lead-modal.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.midway-lead-modal-content {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 32rem;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.midway-lead-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #6b7280;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  transition: background 0.2s ease;
+}
+
+.midway-lead-close:hover {
+  background: #f3f4f6;
+}
+
+.midway-lead-modal-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.midway-lead-modal-header h3 {
+  color: #1f2937;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.midway-lead-modal-header p {
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.midway-lead-modal-header ul {
+  text-align: left;
+  list-style: none;
+  padding: 0;
+}
+
+.midway-lead-modal-header li {
+  padding: 0.5rem 0;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.midway-lead-modal-header li:last-child {
+  border-bottom: none;
+}
+
+.midway-lead-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.midway-lead-form .form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.midway-lead-form .form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.midway-lead-form .form-input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.midway-lead-form .submit-button {
+  width: 100%;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.midway-lead-form .submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+}
+
+/* Success Message Styles */
+.success-message {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.success-message p:first-child {
+  margin-top: 0;
+}
+
+.success-message p:last-child {
+  margin-bottom: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced Lead Section Styles */
+.enhanced-lead-section {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-radius: 1rem;
+  border: 2px solid #0ea5e9;
+}
+
+.enhanced-lead-content h3 {
+  color: #0c4a6e;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.enhanced-lead-content p {
+  color: #0369a1;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.enhanced-lead-content ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.enhanced-lead-content li {
+  padding: 0.5rem 0;
+  color: #0c4a6e;
+  text-align: center;
+  border-bottom: 1px solid #bae6fd;
+}
+
+.enhanced-lead-content li:last-child {
+  border-bottom: none;
+}
+
+.enhanced-lead-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.enhanced-lead-form .form-group {
+  margin-bottom: 0;
+}
+
+.enhanced-lead-form .form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #0c4a6e;
+}
+
+.enhanced-lead-form .form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #bae6fd;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.enhanced-lead-form .form-input:focus {
+  outline: none;
+  border-color: #0ea5e9;
+}
+
+.enhanced-lead-form .enhanced-submit-button {
+  width: 100%;
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.enhanced-lead-form .enhanced-submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(14, 165, 233, 0.3);
+}
+
+.already-subscribed {
+  text-align: center;
+  padding: 2rem;
+  background: #f0fdf4;
+  border: 2px solid #22c55e;
+  border-radius: 0.5rem;
+}
+
+.already-subscribed p {
+  color: #166534;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.download-again-button {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.download-again-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(34, 197, 94, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .enhanced-lead-form .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .enhanced-lead-section {
+    padding: 1.5rem;
+  }
+}
+</style>
+
+<!-- html2canvas library for screenshot capture -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+</head>
+<body>
+
+<!-- Disclaimer Screen -->
+<div id="disclaimer-screen" class="disclaimer-screen">
+  <div class="disclaimer-container">
+    <div class="disclaimer-header">
+      <div class="disclaimer-title-row">
+        <svg class="warning-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+          <path d="M12 9v4"/>
+          <path d="m12 17 .01 0"/>
+        </svg>
+        <h1>Important ! Avant d'accéder au simulateur, lisez ceci</h1>
+      </div>
+      <h2>Clause de non-responsabilité</h2>
+      <div class="disclaimer-divider"></div>
+    </div>
+    
+    <div class="disclaimer-content">
+      <div class="disclaimer-text">
+        <p>Ce simulateur est un outil d'information utile, précis et transparent, conçu pour simplifier l'accès aux critères gouvernementaux publiquement disponibles pour le Programme de sélection des travailleurs qualifiés (PSTQ).</p>
+        <p>Il calcule un score estimatif basé uniquement sur la <a href="https://cdn-contenu.quebec.ca/cdn-contenu/immigration/publications/fr/Pointage_criteres.pdf" target="_blank" rel="noopener noreferrer">nouvelle grille officielle de calcul</a> annoncée par le ministère en date du 2 juillet 2025.</p>
+        <p class="warning-text">Ce simulateur ne constitue en aucun cas un avis juridique ou en immigration, ni ne garantit une évaluation ou un résultat officiel. Nous n'agissons pas en tant que consultants ou avocats en immigration.</p>
+        <p>Les résultats fournis sont à titre informatif seulement et ne doivent pas être considérés comme un substitut à un conseil juridique professionnel ou à une évaluation officielle du MIFI.</p>
+        <p class="final-note">Pour les informations les plus récentes et définitives, veuillez toujours vous référer directement aux sources officielles du MIFI.</p>
+      </div>
+    </div>
+    
+    <div class="disclaimer-actions">
+      <div class="checkbox-container">
+        <input type="checkbox" id="disclaimer-checkbox" class="disclaimer-checkbox">
+        <label for="disclaimer-checkbox">J'ai lu, je comprends et j'accepte les termes de la clause de non-responsabilité.</label>
+      </div>
+      <div class="button-container">
+        <button id="accept-disclaimer" class="accept-button" disabled>
+          <svg style="width: 1.25rem; height: 1.25rem;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22,4 12,14.01 9,11.01"/>
+          </svg>
+          Accéder au simulateur
+        </button>
+      </div>
+    </div>
+    
+    <div class="disclaimer-footer">
+      <p>© 2025 Simulateur de Score de Classement Arrima Québec. Conçu par J'arrive Québec.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Main Application -->
+<div id="main-app" class="main-app" style="display: none;">
+  <!-- Fixed Navigation -->
+  <nav class="fixed-nav">
+    <div class="nav-container">
+      <!-- Desktop Navigation -->
+      <div class="desktop-nav">
+        <div class="nav-buttons">
+          <button class="nav-button active" data-section="0">
+            <span>👤</span><span>Profil</span>
+          </button>
+          <button class="nav-button" data-section="1">
+            <span>🗣️</span><span>Français</span>
+          </button>
+          <button class="nav-button" data-section="2">
+            <span>🎓</span><span>Formation</span>
+          </button>
+          <button class="nav-button" data-section="3">
+            <span>🍁</span><span>Québec</span>
+          </button>
+          <button class="nav-button" data-section="4">
+            <span>💼</span><span>Emploi</span>
+          </button>
+          <button class="nav-button" data-section="5">
+            <span>👫</span><span>Conjoint</span>
+          </button>
+          <button class="nav-button results-button" data-section="results">
+            <svg style="width: 1rem; height: 1rem;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="2" width="16" height="20" rx="2"/>
+              <line x1="8" y1="6" x2="16" y2="6"/>
+              <line x1="8" y1="10" x2="16" y2="10"/>
+              <line x1="8" y1="14" x2="16" y2="14"/>
+              <line x1="8" y1="18" x2="9" y2="18"/>
+              <line x1="12" y1="18" x2="16" y2="18"/>
+            </svg>
+            <span>Résultats</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Mobile Navigation -->
+      <div class="mobile-nav">
+        <div class="mobile-nav-scroll" id="mobile-nav-scroll">
+          <button class="mobile-nav-button active" data-section="0">
+            <span>👤</span><span>Profil</span>
+          </button>
+          <button class="mobile-nav-button" data-section="1">
+            <span>🗣️</span><span>Français</span>
+          </button>
+          <button class="mobile-nav-button" data-section="2">
+            <span>🎓</span><span>Formation</span>
+          </button>
+          <button class="mobile-nav-button" data-section="3">
+            <span>🍁</span><span>Québec</span>
+          </button>
+          <button class="mobile-nav-button" data-section="4">
+            <span>💼</span><span>Emploi</span>
+          </button>
+          <button class="mobile-nav-button" data-section="5">
+            <span>👫</span><span>Conjoint</span>
+          </button>
+          <button class="mobile-nav-button results-button" data-section="results">
+            <svg style="width: 1rem; height: 1rem;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="2" width="16" height="20" rx="2"/>
+              <line x1="8" y1="6" x2="16" y2="6"/>
+              <line x1="8" y1="10" x2="16" y2="10"/>
+              <line x1="8" y1="14" x2="16" y2="14"/>
+              <line x1="8" y1="18" x2="9" y2="18"/>
+              <line x1="12" y1="18" x2="16" y2="18"/>
+            </svg>
+            <span>Résultats</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Results Page -->
+    <div id="results-page" class="results-page" style="display: none;">
+      <div class="results-container">
+        <div class="results-card">
+          <div class="results-header">
+            <h1 class="results-title">
+              <svg style="width: 1.5rem; height: 1.5rem;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="4" y="2" width="16" height="20" rx="2"/>
+                <line x1="8" y1="6" x2="16" y2="6"/>
+                <line x1="8" y1="10" x2="16" y2="10"/>
+                <line x1="8" y1="14" x2="16" y2="14"/>
+                <line x1="8" y1="18" x2="9" y2="18"/>
+                <line x1="12" y1="18" x2="16" y2="18"/>
+              </svg>
+              Résultats du Calculateur Arrima PSTQ
+            </h1>
+            <p class="results-subtitle">Basé sur la grille officielle mise à jour le 2 juillet 2025</p>
+          </div>
+          <div class="results-content">
+            <div class="score-display">
+              <h2 id="total-score" class="total-score">0 points</h2>
+              <p class="score-subtitle">Score total sur un maximum de 1600</p>
+            </div>
+            <div class="breakdown-container">
+              <div class="breakdown-grid">
+                <div class="breakdown-section">
+                  <h4 class="breakdown-title linguistic">Compétences linguistiques</h4>
+                  <div class="breakdown-items">
+                    <div class="breakdown-item"><span>Compréhension orale:</span><span id="french-oral" class="breakdown-value">0 pts</span></div>
+                    <div class="breakdown-item"><span>Production orale:</span><span id="french-oral-prod" class="breakdown-value">0 pts</span></div>
+                    <div class="breakdown-item"><span>Compréhension écrite:</span><span id="french-written" class="breakdown-value">0 pts</span></div>
+                    <div class="breakdown-item"><span>Production écrite:</span><span id="french-written-prod" class="breakdown-value">0 pts</span></div>
+                    <div class="breakdown-item total"><span>Sous-total français:</span><span id="french-total" class="breakdown-value total-value">0 pts</span></div>
+                  </div>
+                </div>
+                <div class="breakdown-section">
+                  <h4 class="breakdown-title quebec">Facteurs Québec</h4>
+                  <div class="breakdown-items">
+                    <div class="breakdown-item"><span>Diplôme du Québec:</span><span id="quebec-diploma" class="breakdown-value">0 pts</span></div>
+                    <div class="breakdown-item"><span>Expérience de travail au Québec:</span><span id="quebec-work" class="breakdown-value">0 pts</span></div>
+                  </div>
+                </div>
+                <div class="breakdown-section">
+                  <h4 class="breakdown-title capital">Capital humain</h4>
+                  <div class="breakdown-items">
+                    <div class="breakdown-item"><span>Âge:</span><span id="age-score" class="breakdown-value">0 pts</span></div>
+                    <div class="breakdown-item"><span>Niveau de scolarité:</span><span id="education-score" class="breakdown-value">0 pts</span></div>
+                    <div class="breakdown-item"><span>Expérience de travail:</span><span id="work-experience-score" class="breakdown-value">0 pts</span></div>
+                  </div>
+                </div>
+                <div class="breakdown-section">
+                  <h4 class="breakdown-title additional">Facteurs additionnels</h4>
+                  <div class="breakdown-items">
+                    <div class="breakdown-item"><span>Offre d'emploi:</span><span id="job-offer-score" class="breakdown-value">0 pts</span></div>
+                    <div class="breakdown-item"><span>Profession (diagnostic main-d'œuvre):</span><span id="profession-score" class="breakdown-value">0 pts</span></div>
+                    <div class="breakdown-item"><span>Expérience dans la profession:</span><span id="profession-experience-score" class="breakdown-value">0 pts</span></div>
+                    <div class="breakdown-item"><span>Autorisation professionnelle:</span><span id="authorization-score" class="breakdown-value">0 pts</span></div>
+                    <div class="breakdown-item"><span>Études au Québec (sans diplôme):</span><span id="study-score" class="breakdown-value">0 pts</span></div>
+                    <div class="breakdown-item"><span>Séjour hors Montréal:</span><span id="outside-montreal-score" class="breakdown-value">0 pts</span></div>
+                    <div class="breakdown-item"><span>Famille proche au Québec:</span><span id="family-score" class="breakdown-value">0 pts</span></div>
+                    <div id="spouse-breakdown" class="spouse-breakdown" style="display: none;">
+                      <div class="breakdown-item"><span>Français conjoint:</span><span id="spouse-french-score" class="breakdown-value">0 pts</span></div>
+                      <div class="breakdown-item"><span>Âge conjoint:</span><span id="spouse-age-score" class="breakdown-value">0 pts</span></div>
+                      <div class="breakdown-item"><span>Expérience conjoint:</span><span id="spouse-quebec-work-score" class="breakdown-value">0 pts</span></div>
+                      <div class="breakdown-item"><span>Scolarité conjoint:</span><span id="spouse-education-score" class="breakdown-value">0 pts</span></div>
+                      <div class="breakdown-item"><span>Diplôme QC conjoint:</span><span id="spouse-quebec-diploma-score" class="breakdown-value">0 pts</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="results-actions">
+          <div class="action-buttons">
+            <button id="download-results" class="action-button primary">
+              <svg style="width: 1rem; height: 1rem;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7,10 12,15 17,10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Télécharger les résultats
+            </button>
+          </div>
+
+          <div class="lead-magnet-card">
+            <div class="lead-magnet-content">
+              <div class="lead-magnet-header">
+                <h2>Attendez ! Doublez vos ressources, gratuitement.</h2>
+              </div>
+              
+              <!-- PDF Cover Image - Mobile First -->
+              <div class="lead-magnet-image-mobile">
+                <img src="https://cdn.prod.website-files.com/681220773670b14061a4d1d1/6898055336919faea4d497ae_cover_2_freebies.png" alt="Pack Complet - Guide des Documents Essentiels + Objectif Emploi" />
+              </div>
+              
+              <div class="lead-magnet-body">
+                <div class="lead-magnet-form">
+                  <div class="guide-title">
+                    <h3>Attendez ! Doublez vos ressources, gratuitement.</h3>
+                  </div>
+                  <p class="guide-description">Téléchargez gratuitement 2 guides pour bien démarrer votre procédure !<br><br>Obtenez nos deux manuels stratégiques les plus téléchargés : le Guide des Documents Essentiels Arrima + Objectif Emploi pour vous aider dans votre recherche d'emploi.</p>
+                  <form id="email-form" class="email-form">
+                    <div class="form-group">
+                      <label for="email-input" class="form-label">Adresse courriel *</label>
+                      <input type="email" id="email-input" class="form-input" placeholder="votre.courriel@exemple.com" required>
+                    </div>
+                    <div class="checkbox-group">
+                      <label class="checkbox-label">
+                        <input type="checkbox" required class="checkbox-input">
+                        <span class="checkbox-text">Je veux recevoir le guide et j'accepte de recevoir les communications de J'arrive Québec. Je peux me désinscrire à tout moment.</span>
+                      </label>
+                      <label class="checkbox-label">
+                        <input type="checkbox" required class="checkbox-input">
+                        <span class="checkbox-text">J'ai lu et j'accepte la <a href="#" class="link">Politique de Confidentialité</a> et les <a href="#" class="link">Conditions Générales d'Utilisation</a>.</span>
+                      </label>
+                    </div>
+                    <button type="submit" class="submit-button">📧 Recevoir mon pack par e-mail</button>
+                  </form>
+                </div>
+                
+                <!-- PDF Cover Image - Desktop -->
+                <div class="lead-magnet-image-desktop">
+                  <img src="https://cdn.prod.website-files.com/681220773670b14061a4d1d1/6898055336919faea4d497ae_cover_2_freebies.png" alt="Pack Complet - Guide des Documents Essentiels + Objectif Emploi" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="disclaimer-alert">
+            <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+              <path d="M12 9v4"/>
+              <path d="m12 17 .01 0"/>
+            </svg>
+            <div class="alert-content">
+              <p>Simulateur Arrima par J'arrive Québec (MIFI, 2 juillet 2025). Outil d'estimation, non un avis juridique. Nous ne sommes pas des professionnels de l'immigration agréés. Référez-vous aux sources officielles : 
+            <a href="https://www.quebec.ca/immigration" target="_blank" rel="noopener noreferrer" class="alert-link">MIFI</a> et 
+              <a href="https://www.canada.ca/fr/immigration-refugies-citoyennete.html" target="_blank" rel="noopener noreferrer" class="alert-link">IRCC</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Pages -->
+    <div id="form-pages" class="form-pages">
+      <div class="form-container">
+        <div class="header-card">
+          <div class="header-content">
+            <h1 class="header-title">Calculateur Arrima PSTQ 2025</h1>
+            <p class="header-subtitle">Simulateur basé sur la nouvelle grille officielle mise à jour le 2 juillet 2025</p>
+          </div>
+        </div>
+
+        <div class="form-card">
+
+          
+          <div class="form-header">
+            <h2 class="section-title">
+              <span id="section-icon" class="section-icon">👤</span>
+              <span id="section-name">Profil</span>
+            </h2>
+            <div class="progress-bar">
+              <div id="progress-fill" class="progress-fill"></div>
+            </div>
+            <p id="progress-text" class="progress-text">Section 1 sur 6</p>
+          </div>
+
+          <div class="form-content">
+            <!-- Section 0: Profil -->
+            <div id="section-0" class="form-section active">
+              <div class="section-group">
+                <h3 class="group-title">Statut conjugal</h3>
+                <label class="form-label">Avez-vous un époux ou conjoint de fait qui vous accompagne ?</label>
+                <div class="radio-group">
+                  <label class="radio-label">
+                    <input type="radio" name="hasSpouse" value="false" class="radio-input" checked>
+                    <span class="radio-text">Non, je suis célibataire</span>
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="hasSpouse" value="true" class="radio-input">
+                    <span class="radio-text">Oui, j'ai un époux/conjoint qui m'accompagne</span>
+                  </label>
+                </div>
+              </div>
+              <div class="separator"></div>
+              <div class="section-group">
+                <h3 class="group-title">Âge</h3>
+                <div class="alert info">
+                  <strong>Maximum :</strong> <span id="age-max-points">120 points</span> pour l'âge
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Votre âge</label>
+                  <select id="age" class="form-select">
+                    <option value="">Sélectionnez votre tranche d'âge</option>
+                    <option value="18-19">18 à 19 ans (110 points)</option>
+                    <option value="20-30">20 à 30 ans (120 points)</option>
+                    <option value="31">31 ans (110 points)</option>
+                    <option value="32">32 ans (100 points)</option>
+                    <option value="33">33 ans (90 points)</option>
+                    <option value="34">34 ans (80 points)</option>
+                    <option value="35">35 ans (75 points)</option>
+                    <option value="36">36 ans (70 points)</option>
+                    <option value="37">37 ans (65 points)</option>
+                    <option value="38">38 ans (60 points)</option>
+                    <option value="39">39 ans (55 points)</option>
+                    <option value="40">40 ans (50 points)</option>
+                    <option value="41">41 ans (40 points)</option>
+                    <option value="42">42 ans (30 points)</option>
+                    <option value="43">43 ans (20 points)</option>
+                    <option value="44">44 ans (10 points)</option>
+                    <option value="45+">45 ans ou plus (0 points)</option>
+                  </select>
+                </div>
+                <div id="spouse-age-group" class="form-group" style="display: none;">
+                  <label class="form-label">Âge de votre conjoint</label>
+                  <select id="spouseAge" class="form-select">
+                    <option value="">Sélectionnez l'âge de votre conjoint</option>
+                    <option value="16-19">16 à 19 ans (18 points)</option>
+                    <option value="20-30">20 à 30 ans (20 points)</option>
+                    <option value="31">31 ans (18 points)</option>
+                    <option value="32">32 ans (17 points)</option>
+                    <option value="33">33 ans (16 points)</option>
+                    <option value="34">34 ans (15 points)</option>
+                    <option value="35">35 ans (14 points)</option>
+                    <option value="36">36 ans (12 points)</option>
+                    <option value="37">37 ans (10 points)</option>
+                    <option value="38">38 ans (8 points)</option>
+                    <option value="39">39 ans (7 points)</option>
+                    <option value="40">40 ans (6 points)</option>
+                    <option value="41">41 ans (5 points)</option>
+                    <option value="42">42 ans (4 points)</option>
+                    <option value="43">43 ans (3 points)</option>
+                    <option value="44">44 ans (2 points)</option>
+                    <option value="45+">45 ans ou plus (0 points)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 1: Français -->
+            <div id="section-1" class="form-section">
+                          <div class="alert info">
+              <strong>Maximum :</strong> <span id="french-max-points">50 points</span> pour la connaissance du français
+            </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Compréhension orale</label>
+                  <select id="frenchOral" class="form-select">
+                    <option value="">Sélectionnez votre niveau</option>
+                    <option value="1-4">Niveau 1 à 4 (0 points)</option>
+                    <option value="5-6">Niveau 5 ou 6 (38 points)</option>
+                    <option value="7-8">Niveau 7 ou 8 (44 points)</option>
+                    <option value="9-10">Niveau 9 ou 10 (50 points)</option>
+                    <option value="11-12">Niveau 11 ou 12 (50 points)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Production orale</label>
+                  <select id="frenchOralProduction" class="form-select">
+                    <option value="">Sélectionnez votre niveau</option>
+                    <option value="1-4">Niveau 1 à 4 (0 points)</option>
+                    <option value="5-6">Niveau 5 ou 6 (38 points)</option>
+                    <option value="7-8">Niveau 7 ou 8 (44 points)</option>
+                    <option value="9-10">Niveau 9 ou 10 (50 points)</option>
+                    <option value="11-12">Niveau 11 ou 12 (50 points)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Compréhension écrite</label>
+                  <select id="frenchWritten" class="form-select">
+                    <option value="">Sélectionnez votre niveau</option>
+                    <option value="1-4">Niveau 1 à 4 (0 points)</option>
+                    <option value="5-6">Niveau 5 ou 6 (38 points)</option>
+                    <option value="7-8">Niveau 7 ou 8 (44 points)</option>
+                    <option value="9-10">Niveau 9 ou 10 (50 points)</option>
+                    <option value="11-12">Niveau 11 ou 12 (50 points)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Production écrite</label>
+                  <select id="frenchWrittenProduction" class="form-select">
+                    <option value="">Sélectionnez votre niveau</option>
+                    <option value="1-4">Niveau 1 à 4 (0 points)</option>
+                    <option value="5-6">Niveau 5 ou 6 (38 points)</option>
+                    <option value="7-8">Niveau 7 ou 8 (44 points)</option>
+                    <option value="9-10">Niveau 9 ou 10 (50 points)</option>
+                    <option value="11-12">Niveau 11 ou 12 (50 points)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2: Formation -->
+            <div id="section-2" class="form-section">
+              <div class="section-group">
+                <h3 class="group-title">Niveau de scolarité</h3>
+                            <div class="alert info">
+              <strong>Maximum :</strong> <span id="education-max-points">130 points</span> pour le niveau de scolarité
+            </div>
+                <div class="form-group">
+                  <label class="form-label">Votre plus haut niveau de scolarité</label>
+                  <select id="education" class="form-select">
+                    <option value="">Sélectionnez votre niveau</option>
+                    <option value="secondaire-general">Secondaire général complété (13 points)</option>
+                    <option value="secondaire-pro-600">Secondaire professionnel 600-899h (Québec) (13 points)</option>
+                    <option value="secondaire-pro-900">Secondaire professionnel 900h+ (Québec) (26 points)</option>
+                    <option value="secondaire-pro-1an">Secondaire professionnel 1 an+ (hors Québec) (26 points)</option>
+                    <option value="postsecondaire-general">Postsecondaire général 2 ans (39 points)</option>
+                    <option value="postsecondaire-tech-900">Postsecondaire technique 900h+ (Québec) (52 points)</option>
+                    <option value="postsecondaire-tech-1-2">Postsecondaire technique 1-2 ans (hors Québec) (52 points)</option>
+                    <option value="postsecondaire-tech-3">Postsecondaire technique 3 ans (78 points)</option>
+                    <option value="universitaire-1-1">Universitaire 1er cycle 1 an (78 points)</option>
+                    <option value="universitaire-1-2">Universitaire 1er cycle 2 ans (91 points)</option>
+                    <option value="universitaire-1-3-4">Universitaire 1er cycle 3-4 ans (104 points)</option>
+                    <option value="universitaire-1-5">Universitaire 1er cycle 5 ans+ (110 points)</option>
+                    <option value="universitaire-2-1">Universitaire 2e cycle 1 an (110 points)</option>
+                    <option value="universitaire-2-2">Universitaire 2e cycle 2 ans+ (117 points)</option>
+                    <option value="universitaire-medical">Universitaire spécialisation médicale 2 ans+ (130 points)</option>
+                    <option value="universitaire-3">Universitaire 3e cycle (130 points)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="separator"></div>
+              <div class="section-group">
+                <h3 class="group-title">Expérience de travail</h3>
+                            <div class="alert info">
+              <strong>Maximum :</strong> <span id="work-max-points">70 points</span> pour l'expérience de travail
+            </div>
+                <div class="form-group">
+                  <label class="form-label">Durée de votre expérience de travail (au cours des 5 dernières années)</label>
+                  <select id="workExperience" class="form-select">
+                    <option value="">Sélectionnez la durée</option>
+                    <option value="0-11">Moins de 12 mois (0 points)</option>
+                    <option value="12-23">12 à 23 mois (20 points)</option>
+                    <option value="24-35">24 à 35 mois (40 points)</option>
+                    <option value="36-47">36 à 47 mois (50 points)</option>
+                    <option value="48+">48 mois et plus (70 points)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 3: Québec -->
+            <div id="section-3" class="form-section">
+              <div class="section-group">
+                <h3 class="group-title">Diplôme du Québec</h3>
+                <div class="alert info">
+                  <strong>Maximum :</strong> 200 points pour un diplôme du Québec
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Avez-vous un diplôme obtenu au Québec ?</label>
+                  <select id="quebecDiploma" class="form-select">
+                    <option value="">Sélectionnez votre diplôme du Québec</option>
+                    <option value="aucun">Aucun diplôme du Québec (0 points)</option>
+                    <option value="secondaire-general">Secondaire général complété (20 points)</option>
+                    <option value="secondaire-pro-600">Secondaire professionnel 600-899h (20 points)</option>
+                    <option value="secondaire-pro-900">Secondaire professionnel 900h+ (40 points)</option>
+                    <option value="postsecondaire-general">Postsecondaire général 2 ans (60 points)</option>
+                    <option value="postsecondaire-tech-900">Postsecondaire technique 900h+ (80 points)</option>
+                    <option value="postsecondaire-tech-3">Postsecondaire technique 3 ans (120 points)</option>
+                    <option value="universitaire-1-1">Universitaire 1er cycle 1 an (120 points)</option>
+                    <option value="universitaire-1-2">Universitaire 1er cycle 2 ans (140 points)</option>
+                    <option value="universitaire-1-3-4">Universitaire 1er cycle 3-4 ans (160 points)</option>
+                    <option value="universitaire-1-5">Universitaire 1er cycle 5 ans+ (170 points)</option>
+                    <option value="universitaire-2-1">Universitaire 2e cycle 1 an (170 points)</option>
+                    <option value="universitaire-2-2">Universitaire 2e cycle 2 ans+ (180 points)</option>
+                    <option value="universitaire-medical">Universitaire spécialisation médicale 2 ans+ (200 points)</option>
+                    <option value="universitaire-3">Universitaire 3e cycle (200 points)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="separator"></div>
+              <div class="section-group">
+                <h3 class="group-title">Expérience au Québec</h3>
+                <div class="alert info">
+                  <strong>Maximum :</strong> 160 points pour l'expérience de travail au Québec
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Durée de votre expérience de travail au Québec (5 dernières années)</label>
+                  <select id="quebecWorkExperience" class="form-select">
+                    <option value="">Sélectionnez la durée</option>
+                    <option value="0-11">Moins de 12 mois (0 points)</option>
+                    <option value="12-23">12 à 23 mois (40 points)</option>
+                    <option value="24-35">24 à 35 mois (80 points)</option>
+                    <option value="36-47">36 à 47 mois (120 points)</option>
+                    <option value="48-60">48 à 60 mois (160 points)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="separator"></div>
+              <div class="section-group">
+                <h3 class="group-title">Études au Québec</h3>
+                <div class="alert info">
+                  <strong>Maximum :</strong> 50 points pour la durée du séjour d'études sans diplôme au Québec
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Durée de votre séjour d'études au Québec (sans diplôme obtenu)</label>
+                  <select id="quebecStudyDuration" class="form-select">
+                    <option value="">Sélectionnez la durée</option>
+                    <option value="aucun">Aucun séjour d'études (0 points)</option>
+                    <option value="6-11">6 à 11 mois (10 points)</option>
+                    <option value="12-23">12 à 23 mois (20 points)</option>
+                    <option value="24-35">24 à 35 mois (30 points)</option>
+                    <option value="36-47">36 à 47 mois (40 points)</option>
+                    <option value="48+">48 mois et plus (50 points)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 4: Emploi -->
+            <div id="section-4" class="form-section">
+              <div class="section-group">
+                <h3 class="group-title">Offre d'emploi</h3>
+                <div class="alert info">
+                  <strong>Maximum :</strong> 50 points pour une offre d'emploi validée
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Avez-vous une offre d'emploi validée dans votre profession principale ?</label>
+                  <select id="jobOffer" class="form-select">
+                    <option value="">Sélectionnez votre situation</option>
+                    <option value="aucun">Aucune offre d'emploi (0 points)</option>
+                    <option value="exterieur-cmm">Offre d'emploi à l'extérieur de la CMM (50 points)</option>
+                    <option value="interieur-cmm">Offre d'emploi à l'intérieur de la CMM (30 points)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="separator"></div>
+              <div class="section-group">
+                <h3 class="group-title">Profession et diagnostic de main-d'œuvre</h3>
+                <div class="alert info">
+                  <strong>Maximum :</strong> 50 points pour la profession et le diagnostic de main-d'œuvre
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Votre profession principale (selon le diagnostic de main-d'œuvre du Québec)</label>
+                  <select id="profession" class="form-select">
+                    <option value="">Sélectionnez votre profession</option>
+                    <option value="profession-demande">Profession en demande (50 points)</option>
+                    <option value="profession-reguliere">Profession régulière (30 points)</option>
+                    <option value="profession-satiree">Profession saturée (0 points)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Durée de l'expérience dans votre profession principale (5 dernières années)</label>
+                  <select id="professionExperience" class="form-select">
+                    <option value="">Sélectionnez la durée</option>
+                    <option value="0-11">Moins de 12 mois (0 points)</option>
+                    <option value="12-23">12 à 23 mois (10 points)</option>
+                    <option value="24-35">24 à 35 mois (20 points)</option>
+                    <option value="36-47">36 à 47 mois (30 points)</option>
+                    <option value="48+">48 mois et plus (40 points)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="separator"></div>
+              <div class="section-group">
+                <h3 class="group-title">Autorisation professionnelle</h3>
+                <div class="alert info">
+                  <strong>Maximum :</strong> 30 points pour l'autorisation professionnelle
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Avez-vous une autorisation d'exercer votre profession au Québec ?</label>
+                  <select id="professionalAuthorization" class="form-select">
+                    <option value="">Sélectionnez votre situation</option>
+                    <option value="aucun">Aucune autorisation (0 points)</option>
+                    <option value="autorisation-validee">Autorisation validée (30 points)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="separator"></div>
+              <div class="section-group">
+                <h3 class="group-title">Famille au Québec</h3>
+                <div class="alert info">
+                  <strong>Maximum :</strong> 10 points pour un membre de la parenté au Québec
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Avez-vous un membre de la parenté au Québec (hors CMM) ?</label>
+                  <select id="familyMember" class="form-select">
+                    <option value="">Sélectionnez votre situation</option>
+                    <option value="aucun">Aucun membre de la parenté (0 points)</option>
+                    <option value="lie-ressortissant">Membre lié au ressortissant étranger (10 points)</option>
+                    <option value="lie-conjoint">Membre lié au conjoint (5 points)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="separator"></div>
+              <div class="section-group">
+                <h3 class="group-title">Séjour hors Montréal</h3>
+                <div class="alert info">
+                  <strong>Maximum :</strong> 30 points pour un séjour hors de la CMM
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Avez-vous l'intention de vous établir à l'extérieur de la CMM ?</label>
+                  <select id="outsideMontreal" class="form-select">
+                    <option value="">Sélectionnez votre intention</option>
+                    <option value="non">Non, je reste dans la CMM (0 points)</option>
+                    <option value="oui">Oui, je m'établis hors de la CMM (30 points)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 5: Conjoint -->
+            <div id="section-5" class="form-section">
+              <div id="spouse-content" style="display: none;">
+                <div class="alert info">
+                  <strong>Maximum :</strong> 130 points pour les informations du conjoint
+                </div>
+                <div class="section-group">
+                  <h3 class="group-title">Connaissance du français du conjoint</h3>
+                  <div class="form-grid">
+                    <div class="form-group">
+                      <label class="form-label">Compréhension orale du conjoint</label>
+                      <select id="spouseFrenchOral" class="form-select">
+                        <option value="">Sélectionnez le niveau</option>
+                        <option value="1-3">Niveau 1 à 3 (0 points)</option>
+                        <option value="4">Niveau 4 (4 points)</option>
+                        <option value="5-6">Niveau 5 ou 6 (6 points)</option>
+                        <option value="7-8">Niveau 7 ou 8 (8 points)</option>
+                        <option value="9-10">Niveau 9 ou 10 (10 points)</option>
+                        <option value="11-12">Niveau 11 ou 12 (10 points)</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Production orale du conjoint</label>
+                      <select id="spouseFrenchOralProduction" class="form-select">
+                        <option value="">Sélectionnez le niveau</option>
+                        <option value="1-3">Niveau 1 à 3 (0 points)</option>
+                        <option value="4">Niveau 4 (4 points)</option>
+                        <option value="5-6">Niveau 5 ou 6 (6 points)</option>
+                        <option value="7-8">Niveau 7 ou 8 (8 points)</option>
+                        <option value="9-10">Niveau 9 ou 10 (10 points)</option>
+                        <option value="11-12">Niveau 11 ou 12 (10 points)</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Compréhension écrite du conjoint</label>
+                      <select id="spouseFrenchWritten" class="form-select">
+                        <option value="">Sélectionnez le niveau</option>
+                        <option value="1-3">Niveau 1 à 3 (0 points)</option>
+                        <option value="4">Niveau 4 (4 points)</option>
+                        <option value="5-6">Niveau 5 ou 6 (6 points)</option>
+                        <option value="7-8">Niveau 7 ou 8 (8 points)</option>
+                        <option value="9-10">Niveau 9 ou 10 (10 points)</option>
+                        <option value="11-12">Niveau 11 ou 12 (10 points)</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Production écrite du conjoint</label>
+                      <select id="spouseFrenchWrittenProduction" class="form-select">
+                        <option value="">Sélectionnez le niveau</option>
+                        <option value="1-3">Niveau 1 à 3 (0 points)</option>
+                        <option value="4">Niveau 4 (4 points)</option>
+                        <option value="5-6">Niveau 5 ou 6 (6 points)</option>
+                        <option value="7-8">Niveau 7 ou 8 (8 points)</option>
+                        <option value="9-10">Niveau 9 ou 10 (10 points)</option>
+                        <option value="11-12">Niveau 11 ou 12 (10 points)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="separator"></div>
+                <div class="section-group">
+                  <h3 class="group-title">Scolarité du conjoint</h3>
+                  <div class="form-group">
+                    <label class="form-label">Plus haut niveau de scolarité de votre conjoint</label>
+                    <select id="spouseEducation" class="form-select">
+                      <option value="">Sélectionnez le niveau</option>
+                      <option value="secondaire-general">Secondaire général complété (2 points)</option>
+                      <option value="secondaire-pro-600">Secondaire professionnel 600-899h (Québec) (2 points)</option>
+                      <option value="secondaire-pro-900">Secondaire professionnel 900h+ (Québec) (4 points)</option>
+                      <option value="secondaire-pro-1an">Secondaire professionnel 1 an+ (hors Québec) (4 points)</option>
+                      <option value="postsecondaire-general">Postsecondaire général 2 ans (6 points)</option>
+                      <option value="postsecondaire-tech-900">Postsecondaire technique 900h+ (Québec) (8 points)</option>
+                      <option value="postsecondaire-tech-1-2">Postsecondaire technique 1-2 ans (hors Québec) (8 points)</option>
+                      <option value="postsecondaire-tech-3">Postsecondaire technique 3 ans (12 points)</option>
+                      <option value="universitaire-1-1">Universitaire 1er cycle 1 an (12 points)</option>
+                      <option value="universitaire-1-2">Universitaire 1er cycle 2 ans (14 points)</option>
+                      <option value="universitaire-1-3-4">Universitaire 1er cycle 3-4 ans (16 points)</option>
+                      <option value="universitaire-1-5">Universitaire 1er cycle 5 ans+ (17 points)</option>
+                      <option value="universitaire-2-1">Universitaire 2e cycle 1 an (17 points)</option>
+                      <option value="universitaire-2-2">Universitaire 2e cycle 2 ans+ (18 points)</option>
+                      <option value="universitaire-medical">Universitaire spécialisation médicale 2 ans+ (20 points)</option>
+                      <option value="universitaire-3">Universitaire 3e cycle (20 points)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="separator"></div>
+                <div class="section-group">
+                  <h3 class="group-title">Diplôme du Québec du conjoint</h3>
+                  <div class="form-group">
+                    <label class="form-label">Diplôme du Québec du conjoint</label>
+                    <select id="spouseQuebecDiploma" class="form-select">
+                      <option value="">Sélectionnez le diplôme</option>
+                      <option value="aucun">Aucun diplôme du Québec (0 points)</option>
+                      <option value="secondaire-general">Secondaire général complété (3 points)</option>
+                      <option value="secondaire-pro-600">Secondaire professionnel 600-899h (3 points)</option>
+                      <option value="secondaire-pro-900">Secondaire professionnel 900h+ (3 points)</option>
+                      <option value="postsecondaire-general">Postsecondaire général 2 ans (9 points)</option>
+                      <option value="postsecondaire-tech-900">Postsecondaire technique 900h+ (12 points)</option>
+                      <option value="postsecondaire-tech-3">Postsecondaire technique 3 ans (18 points)</option>
+                      <option value="universitaire-1-1">Universitaire 1er cycle 1 an (18 points)</option>
+                      <option value="universitaire-1-2">Universitaire 1er cycle 2 ans (21 points)</option>
+                      <option value="universitaire-1-3-4">Universitaire 1er cycle 3-4 ans (24 points)</option>
+                      <option value="universitaire-1-5">Universitaire 1er cycle 5 ans+ (25 points)</option>
+                      <option value="universitaire-2-1">Universitaire 2e cycle 1 an (25 points)</option>
+                      <option value="universitaire-2-2">Universitaire 2e cycle 2 ans+ (27 points)</option>
+                      <option value="universitaire-medical">Universitaire spécialisation médicale 2 ans+ (30 points)</option>
+                      <option value="universitaire-3">Universitaire 3e cycle (30 points)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="separator"></div>
+                <div class="section-group">
+                  <h3 class="group-title">Expérience de travail du conjoint au Québec</h3>
+                  <div class="form-group">
+                    <label class="form-label">Durée d'expérience au Québec (5 dernières années)</label>
+                    <select id="spouseQuebecWork" class="form-select">
+                      <option value="">Sélectionnez la durée</option>
+                      <option value="0-5">0 à 5 mois (0 points)</option>
+                      <option value="6-11">6 à 11 mois (5 points)</option>
+                      <option value="12-23">12 à 23 mois (10 points)</option>
+                      <option value="24-35">24 à 35 mois (15 points)</option>
+                      <option value="36-47">36 à 47 mois (23 points)</option>
+                      <option value="48-60">48 à 60 mois (30 points)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div id="no-spouse-content">
+                <div class="no-spouse-content">
+                  <div class="no-spouse-icon">👫</div>
+                  <h3 class="no-spouse-title">Section Conjoint</h3>
+                  <p class="no-spouse-text">Cette section s'applique uniquement si vous avez un époux ou conjoint de fait qui vous accompagne dans votre demande d'immigration.</p>
+                  <p class="no-spouse-note">Vous avez indiqué être célibataire dans la section Profil. Si c'est une erreur, retournez à la section Profil pour modifier votre statut conjugal.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-footer">
+            <button id="prev-btn" class="nav-btn secondary" disabled>
+              <svg style="width: 1rem; height: 1rem;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15,18 9,12 15,6"/>
+              </svg>
+              Précédent
+            </button>
+            <button id="next-btn" class="nav-btn primary">
+              Suivant
+              <svg style="width: 1rem; height: 1rem;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9,18 15,12 9,6"/>
+              </svg>
+            </button>
+            <button id="calculate-btn" class="nav-btn calculate" style="display: none;">
+              <svg style="width: 1rem; height: 1rem;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="4" y="2" width="16" height="20" rx="2"/>
+                <line x1="8" y1="6" x2="16" y2="6"/>
+                <line x1="8" y1="10" x2="16" y2="10"/>
+                <line x1="8" y1="14" x2="16" y2="14"/>
+                <line x1="8" y1="18" x2="9" y2="18"/>
+                <line x1="12" y1="18" x2="16" y2="18"/>
+              </svg>
+              Calculer mon score
+            </button>
+          </div>
+        </div>
+
+        <div class="disclaimer-alert">
+          <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+            <path d="M12 9v4"/>
+            <path d="m12 17 .01 0"/>
+          </svg>
+          <div class="alert-content">
+            <p>Simulateur Arrima par J'arrive Québec (MIFI, 2 juillet 2025). Outil d'estimation, non un avis juridique. Nous ne sommes pas des professionnels de l'immigration agréés. Référez-vous aux sources officielles : 
+            <a href="https://www.quebec.ca/immigration" target="_blank" rel="noopener noreferrer" class="alert-link">MIFI</a> et 
+            <a href="https://www.canada.ca/fr/immigration-refugies-citoyennete.html" target="_blank" rel="noopener noreferrer" class="alert-link">IRCC</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Global variables
+let currentSection = 0;
+const totalSections = 6;
+let hasSpouse = false;
+let calculatorResults = null;
+
+// Scoring data - Column 1: No spouse, Column 2: With spouse
+const scoringData = {
+  // Age scoring - Column 1 vs Column 2
+  age: {
+    '18-19': 110, '20-30': 120, '31': 110, '32': 100, '33': 90, '34': 80,
+    '35': 75, '36': 70, '37': 65, '38': 60, '39': 55, '40': 50,
+    '41': 40, '42': 30, '43': 20, '44': 10, '45+': 0
+  },
+  ageWithSpouse: {
+    '18-19': 90, '20-30': 100, '31': 95, '32': 90, '33': 81, '34': 72,
+    '35': 68, '36': 63, '37': 59, '38': 54, '39': 50, '40': 45,
+    '41': 36, '42': 27, '43': 18, '44': 9, '45+': 0
+  },
+  spouseAge: {
+    '16-19': 18, '20-30': 20, '31': 18, '32': 17, '33': 16, '34': 15,
+    '35': 14, '36': 12, '37': 10, '38': 8, '39': 7, '40': 6,
+    '41': 5, '42': 4, '43': 3, '44': 2, '45+': 0
+  },
+  
+  // French skills scoring - Column 1 vs Column 2
+  french: {
+    '1-4': 0, '5-6': 38, '7-8': 44, '9-10': 50, '11-12': 50
+  },
+  frenchWithSpouse: {
+    '1-4': 0, '5-6': 30, '7-8': 35, '9-10': 40, '11-12': 40
+  },
+  spouseFrench: {
+    '1-3': 0, '4': 4, '5-6': 6, '7-8': 8, '9-10': 10, '11-12': 10
+  },
+  
+  // Education scoring - Column 1 vs Column 2
+  education: {
+    'secondaire-general': 13, 'secondaire-pro-600': 13, 'secondaire-pro-900': 26,
+    'secondaire-pro-1an': 26, 'postsecondaire-general': 39, 'postsecondaire-tech-900': 52,
+    'postsecondaire-tech-1-2': 52, 'postsecondaire-tech-3': 78, 'universitaire-1-1': 78,
+    'universitaire-1-2': 91, 'universitaire-1-3-4': 104, 'universitaire-1-5': 110,
+    'universitaire-2-1': 110, 'universitaire-2-2': 117, 'universitaire-medical': 130,
+    'universitaire-3': 130
+  },
+  educationWithSpouse: {
+    'secondaire-general': 11, 'secondaire-pro-600': 11, 'secondaire-pro-900': 22,
+    'secondaire-pro-1an': 22, 'postsecondaire-general': 33, 'postsecondaire-tech-900': 44,
+    'postsecondaire-tech-1-2': 44, 'postsecondaire-tech-3': 66, 'universitaire-1-1': 66,
+    'universitaire-1-2': 77, 'universitaire-1-3-4': 88, 'universitaire-1-5': 93,
+    'universitaire-2-1': 93, 'universitaire-2-2': 99, 'universitaire-medical': 110,
+    'universitaire-3': 110
+  },
+  spouseEducation: {
+    'secondaire-general': 2, 'secondaire-pro-600': 2, 'secondaire-pro-900': 4,
+    'secondaire-pro-1an': 4, 'postsecondaire-general': 6, 'postsecondaire-tech-900': 8,
+    'postsecondaire-tech-1-2': 8, 'postsecondaire-tech-3': 12, 'universitaire-1-1': 12,
+    'universitaire-1-2': 14, 'universitaire-1-3-4': 16, 'universitaire-1-5': 17,
+    'universitaire-2-1': 17, 'universitaire-2-2': 18, 'universitaire-medical': 20,
+    'universitaire-3': 20
+  },
+  
+  // Work experience scoring - Column 1 vs Column 2
+  workExperience: {
+    '0-11': 0, '12-23': 20, '24-35': 40, '36-47': 50, '48+': 70
+  },
+  workExperienceWithSpouse: {
+    '0-11': 0, '12-23': 15, '24-35': 30, '36-47': 35, '48+': 50
+  },
+  
+  // Quebec diploma scoring - Column 1 vs Column 2
+  quebecDiploma: {
+    'aucun': 0, 'secondaire-general': 20, 'secondaire-pro-600': 20, 'secondaire-pro-900': 40,
+    'postsecondaire-general': 60, 'postsecondaire-tech-900': 80, 'postsecondaire-tech-3': 120,
+    'universitaire-1-1': 120, 'universitaire-1-2': 140, 'universitaire-1-3-4': 160,
+    'universitaire-1-5': 170, 'universitaire-2-1': 170, 'universitaire-2-2': 180,
+    'universitaire-medical': 200, 'universitaire-3': 200
+  },
+  spouseQuebecDiploma: {
+    'aucun': 0, 'secondaire-general': 3, 'secondaire-pro-600': 3, 'secondaire-pro-900': 6,
+    'postsecondaire-general': 9, 'postsecondaire-tech-900': 12, 'postsecondaire-tech-3': 18,
+    'universitaire-1-1': 18, 'universitaire-1-2': 21, 'universitaire-1-3-4': 24,
+    'universitaire-1-5': 25, 'universitaire-2-1': 25, 'universitaire-2-2': 27,
+    'universitaire-medical': 30, 'universitaire-3': 30
+  },
+  
+  // Quebec work experience scoring - Column 1 vs Column 2
+  quebecWorkExperience: {
+    '0-11': 0, '12-23': 40, '24-35': 80, '36-47': 120, '48-60': 160
+  },
+  spouseQuebecWork: {
+    '0-5': 0, '6-11': 5, '12-23': 10, '24-35': 15, '36-47': 23, '48-60': 30
+  },
+  
+  // Job offer scoring - Same for both (no spouse adjustment)
+  jobOffer: {
+    'aucun': 0, 'exterieur-cmm': 50, 'interieur-cmm': 30
+  },
+  
+  // Profession scoring - Same for both (no spouse adjustment)
+  profession: {
+    'aucun': 0, 'profession-demande': 50, 'profession-reguliere': 30, 'profession-satiree': 0
+  },
+  
+  // Profession experience scoring - Same for both (no spouse adjustment)
+  professionExperience: {
+    'aucun': 0, '0-11': 0, '12-23': 10, '24-35': 20, '36-47': 30, '48+': 40
+  },
+  
+  // Professional authorization scoring - Same for both (no spouse adjustment)
+  professionalAuthorization: {
+    'aucun': 0, 'autorisation-validee': 30
+  },
+  
+  // Quebec study duration scoring - Same for both (no spouse adjustment)
+  quebecStudyDuration: {
+    'aucun': 0, '6-11': 10, '12-23': 20, '24-35': 30, '36-47': 40, '48+': 50
+  },
+  
+  // Outside Montreal scoring - Same for both (no spouse adjustment)
+  outsideMontreal: {
+    'non': 0, 'oui': 30
+  },
+  
+  // Family member scoring - Same for both (no spouse adjustment)
+  familyMember: {
+    'aucun': 0, 'lie-ressortissant': 10, 'lie-conjoint': 5
+  }
+};
+
+// Section data
+const sectionData = [
+  { icon: '👤', name: 'Profil' },
+  { icon: '🗣️', name: 'Français' },
+  { icon: '🎓', name: 'Formation' },
+  { icon: '🍁', name: 'Québec' },
+  { icon: '💼', name: 'Emploi' },
+  { icon: '👫', name: 'Conjoint' }
+];
+
+// Add this function after scoringData and before initializeApp
+function updateAgeDropdown() {
+  const ageSelect = document.getElementById('age');
+  if (!ageSelect) return;
+
+  // Save current value to try to preserve selection
+  const currentValue = ageSelect.value;
+
+  // Age options and their keys
+  const ageOptions = [
+    { value: '18-19', label: '18 à 19 ans' },
+    { value: '20-30', label: '20 à 30 ans' },
+    { value: '31', label: '31 ans' },
+    { value: '32', label: '32 ans' },
+    { value: '33', label: '33 ans' },
+    { value: '34', label: '34 ans' },
+    { value: '35', label: '35 ans' },
+    { value: '36', label: '36 ans' },
+    { value: '37', label: '37 ans' },
+    { value: '38', label: '38 ans' },
+    { value: '39', label: '39 ans' },
+    { value: '40', label: '40 ans' },
+    { value: '41', label: '41 ans' },
+    { value: '42', label: '42 ans' },
+    { value: '43', label: '43 ans' },
+    { value: '44', label: '44 ans' },
+    { value: '45+', label: '45 ans ou plus' }
+  ];
+  const pointsData = hasSpouse ? scoringData.ageWithSpouse : scoringData.age;
+
+  // Clear all options
+  ageSelect.innerHTML = '';
+  // Add default option
+  const defaultOption = document.createElement('option');
+  defaultOption.value = '';
+  defaultOption.textContent = "Sélectionnez votre tranche d'âge";
+  ageSelect.appendChild(defaultOption);
+
+  // Add options with correct points
+  ageOptions.forEach(opt => {
+    const option = document.createElement('option');
+    option.value = opt.value;
+    option.textContent = `${opt.label} (${pointsData[opt.value]} points)`;
+    ageSelect.appendChild(option);
+  });
+
+  // Try to restore previous selection if possible
+  ageSelect.value = currentValue;
+}
+
+// Initialize app when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  initializeDisclaimer();
+  initializeApp();
+});
+
+function initializeDisclaimer() {
+  const checkbox = document.getElementById('disclaimer-checkbox');
+  const acceptButton = document.getElementById('accept-disclaimer');
+  
+  checkbox.addEventListener('change', function() {
+    acceptButton.disabled = !this.checked;
+  });
+  
+  acceptButton.addEventListener('click', function() {
+    if (checkbox.checked) {
+      document.getElementById('disclaimer-screen').style.display = 'none';
+      document.getElementById('main-app').style.display = 'block';
+      updateSectionDisplay();
+      
+      // Scroll to top of the page for mobile users
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  });
+}
+
+function initializeApp() {
+  initializeNavigation();
+  initializeFormHandlers();
+  initializeSpouseToggle();
+  initializeResultsHandlers();
+  updateSectionDisplay();
+  updateNavigation();
+  updateProgressBar();
+  updateAgeDropdown(); // <-- update age dropdown on load
+  updateMaxPointsDisplays(); // <-- update max points displays on load
+  // All options will be updated by updateMaxPointsDisplays()
+  
+  // Exit intent popup - REMOVED
+  
+  // Initialize floating lead bar - REMOVED
+  
+  // Initialize mobile bottom sheet
+  initializeMobileBottomSheet();
+}
+
+function initializeNavigation() {
+  // Desktop and mobile navigation
+  document.querySelectorAll('.nav-button, .mobile-nav-button').forEach(button => {
+    button.addEventListener('click', function() {
+      const section = this.dataset.section;
+      if (section === 'results') {
+        showResults();
+      } else {
+        navigateToSection(parseInt(section));
+      }
+    });
+  });
+  
+  // Form navigation buttons
+  document.getElementById('prev-btn').addEventListener('click', function() {
+    if (currentSection > 0) {
+      navigateToSection(currentSection - 1);
+    }
+  });
+  
+  document.getElementById('next-btn').addEventListener('click', function() {
+    if (currentSection < totalSections - 1) {
+      navigateToSection(currentSection + 1);
+    }
+  });
+  
+  document.getElementById('calculate-btn').addEventListener('click', function() {
+    calculateAndShowResults();
+  });
+}
+
+function initializeFormHandlers() {
+  // Add change listeners to all form inputs
+  document.querySelectorAll('select, input[type="radio"]').forEach(input => {
+    input.addEventListener('change', function() {
+      calculateScore();
+    });
+  });
+  
+  // Ensure all new form fields are included
+  const newFields = ['profession', 'professionExperience', 'professionalAuthorization', 'quebecStudyDuration', 'outsideMontreal'];
+  newFields.forEach(fieldId => {
+    const field = document.getElementById(fieldId);
+    if (field) {
+      field.addEventListener('change', calculateScore);
+    }
+  });
+}
+
+function initializeSpouseToggle() {
+  document.querySelectorAll('input[name="hasSpouse"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+      console.log('Spouse status changed to:', this.value);
+      hasSpouse = this.value === 'true';
+      console.log('hasSpouse variable set to:', hasSpouse);
+      toggleSpouseFields();
+      updateMaxPointsDisplays();
+      updateAgeDropdown(); // <-- update age dropdown immediately
+      calculateScore();
+    });
+  });
+}
+
+function initializeResultsHandlers() {
+  document.getElementById('download-results').addEventListener('click', downloadResults);
+  document.getElementById('email-form').addEventListener('submit', handleEmailSubmit);
+}
+
+function toggleSpouseFields() {
+  const spouseAgeGroup = document.getElementById('spouse-age-group');
+  const spouseContent = document.getElementById('spouse-content');
+  const noSpouseContent = document.getElementById('no-spouse-content');
+  
+  if (spouseAgeGroup) {
+    spouseAgeGroup.style.display = hasSpouse ? 'block' : 'none';
+  }
+  
+  if (spouseContent && noSpouseContent) {
+    spouseContent.style.display = hasSpouse ? 'block' : 'none';
+    noSpouseContent.style.display = hasSpouse ? 'none' : 'block';
+  }
+}
+
+function updateMaxPointsDisplays() {
+  const ageMaxPoints = document.getElementById('age-max-points');
+  const frenchMaxPoints = document.getElementById('french-max-points');
+  const educationMaxPoints = document.getElementById('education-max-points');
+  const workMaxPoints = document.getElementById('work-max-points');
+  
+  if (ageMaxPoints) ageMaxPoints.textContent = hasSpouse ? '100 points' : '120 points';
+  if (frenchMaxPoints) frenchMaxPoints.textContent = hasSpouse ? '40 points' : '50 points';
+  if (educationMaxPoints) educationMaxPoints.textContent = hasSpouse ? '110 points' : '130 points';
+  if (workMaxPoints) workMaxPoints.textContent = hasSpouse ? '50 points' : '70 points';
+  
+  // Update all option values based on spouse status
+  updateFrenchOptions();
+  updateWorkExperienceOptions();
+  updateEducationOptions();
+}
+
+function updateFrenchOptions() {
+  console.log('updateFrenchOptions called, hasSpouse:', hasSpouse);
+  
+  const frenchSelects = [
+    'frenchOral',
+    'frenchOralProduction', 
+    'frenchWritten',
+    'frenchWrittenProduction'
+  ];
+  
+  frenchSelects.forEach(selectId => {
+    const select = document.getElementById(selectId);
+    if (!select) {
+      console.log('Select element not found:', selectId);
+      return;
+    }
+    
+    console.log('Updating select:', selectId);
+    
+    // Save current value
+    const currentValue = select.value;
+    
+    // Clear options
+    select.innerHTML = '';
+    
+    // Add default option
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.textContent = "Sélectionnez votre niveau";
+    select.appendChild(defaultOption);
+    
+    // Add options based on spouse status
+    if (hasSpouse) {
+      console.log('Adding spouse options (40 points max)');
+      // With spouse: Maximum 40 points each
+      const options = [
+        { value: '1-4', label: 'Niveau 1 à 4 (0 points)' },
+        { value: '5-6', label: 'Niveau 5 ou 6 (30 points)' },
+        { value: '7-8', label: 'Niveau 7 ou 8 (35 points)' },
+        { value: '9-10', label: 'Niveau 9 ou 10 (40 points)' },
+        { value: '11-12', label: 'Niveau 11 ou 12 (40 points)' }
+      ];
+      options.forEach(opt => {
+        const option = document.createElement('option');
+        option.value = opt.value;
+        option.textContent = opt.label;
+        select.appendChild(option);
+      });
+    } else {
+      console.log('Adding single options (50 points max)');
+      // No spouse: Maximum 50 points each
+      const options = [
+        { value: '1-4', label: 'Niveau 1 à 4 (0 points)' },
+        { value: '5-6', label: 'Niveau 5 ou 6 (38 points)' },
+        { value: '7-8', label: 'Niveau 7 ou 8 (44 points)' },
+        { value: '9-10', label: 'Niveau 9 ou 10 (50 points)' },
+        { value: '11-12', label: 'Niveau 11 ou 12 (50 points)' }
+      ];
+      options.forEach(opt => {
+        const option = document.createElement('option');
+        option.value = opt.value;
+        option.textContent = opt.label;
+        select.appendChild(option);
+      });
+    }
+    
+    // Restore previous value if possible
+    select.value = currentValue;
+    
+    console.log('Updated select:', selectId, 'with', select.options.length, 'options');
+  });
+}
+
+function updateWorkExperienceOptions() {
+  console.log('updateWorkExperienceOptions called, hasSpouse:', hasSpouse);
+  
+  const workSelect = document.getElementById('workExperience');
+  if (!workSelect) {
+    console.log('Work experience select element not found');
+    return;
+  }
+  
+  console.log('Updating work experience select');
+  
+  // Save current value
+  const currentValue = workSelect.value;
+  
+  // Clear options
+  workSelect.innerHTML = '';
+  
+  // Add default option
+  const defaultOption = document.createElement('option');
+  defaultOption.value = '';
+  defaultOption.textContent = "Sélectionnez la durée";
+  workSelect.appendChild(defaultOption);
+  
+  // Add options based on spouse status
+  if (hasSpouse) {
+    console.log('Adding spouse work experience options (50 points max)');
+    // With spouse: Maximum 50 points
+    const options = [
+      { value: '0-11', label: 'Moins de 12 mois (0 points)' },
+      { value: '12-23', label: '12 à 23 mois (15 points)' },
+      { value: '24-35', label: '24 à 35 mois (30 points)' },
+      { value: '36-47', label: '36 à 47 mois (35 points)' },
+      { value: '48+', label: '48 mois et plus (50 points)' }
+    ];
+    options.forEach(opt => {
+      const option = document.createElement('option');
+      option.value = opt.value;
+      option.textContent = opt.label;
+      workSelect.appendChild(option);
+    });
+  } else {
+    console.log('Adding single work experience options (70 points max)');
+    // No spouse: Maximum 70 points
+    const options = [
+      { value: '0-11', label: 'Moins de 12 mois (0 points)' },
+      { value: '12-23', label: '12 à 23 mois (20 points)' },
+      { value: '24-35', label: '24 à 35 mois (40 points)' },
+      { value: '36-47', label: '36 à 47 mois (50 points)' },
+      { value: '48+', label: '48 mois et plus (70 points)' }
+    ];
+    options.forEach(opt => {
+      const option = document.createElement('option');
+      option.value = opt.value;
+      option.textContent = opt.label;
+      workSelect.appendChild(option);
+    });
+  }
+  
+  // Restore previous value if possible
+  workSelect.value = currentValue;
+  
+  console.log('Updated work experience select with', workSelect.options.length, 'options');
+}
+
+function updateEducationOptions() {
+  console.log('updateEducationOptions called, hasSpouse:', hasSpouse);
+  
+  const educationSelect = document.getElementById('education');
+  if (!educationSelect) {
+    console.log('Education select element not found');
+    return;
+  }
+  
+  console.log('Updating education select');
+  
+  // Save current value
+  const currentValue = educationSelect.value;
+  
+  // Clear options
+  educationSelect.innerHTML = '';
+  
+  // Add default option
+  const defaultOption = document.createElement('option');
+  defaultOption.value = '';
+  defaultOption.textContent = "Sélectionnez votre niveau";
+  educationSelect.appendChild(defaultOption);
+  
+  // Add options based on spouse status
+  if (hasSpouse) {
+    console.log('Adding spouse education options (110 points max)');
+    // With spouse: Maximum 110 points
+    const options = [
+      { value: 'secondaire-general', label: 'Secondaire général complété (11 points)' },
+      { value: 'secondaire-pro-600', label: 'Secondaire professionnel 600-899h (Québec) (11 points)' },
+      { value: 'secondaire-pro-900', label: 'Secondaire professionnel 900h+ (Québec) (22 points)' },
+      { value: 'secondaire-pro-1an', label: 'Secondaire professionnel 1 an+ (hors Québec) (22 points)' },
+      { value: 'postsecondaire-general', label: 'Postsecondaire général 2 ans (33 points)' },
+      { value: 'postsecondaire-tech-900', label: 'Postsecondaire technique 900h+ (Québec) (44 points)' },
+      { value: 'postsecondaire-tech-1-2', label: 'Postsecondaire technique 1-2 ans (hors Québec) (44 points)' },
+      { value: 'postsecondaire-tech-3', label: 'Postsecondaire technique 3 ans (66 points)' },
+      { value: 'universitaire-1-1', label: 'Universitaire 1er cycle 1 an (66 points)' },
+      { value: 'universitaire-1-2', label: 'Universitaire 1er cycle 2 ans (77 points)' },
+      { value: 'universitaire-1-3-4', label: 'Universitaire 1er cycle 3-4 ans (88 points)' },
+      { value: 'universitaire-1-5', label: 'Universitaire 1er cycle 5 ans+ (93 points)' },
+      { value: 'universitaire-2-1', label: 'Universitaire 2e cycle 1 an (93 points)' },
+      { value: 'universitaire-2-2', label: 'Universitaire 2e cycle 2 ans+ (99 points)' },
+      { value: 'universitaire-medical', label: 'Universitaire spécialisation médicale 2 ans+ (110 points)' },
+      { value: 'universitaire-3', label: 'Universitaire 3e cycle (110 points)' }
+    ];
+    options.forEach(opt => {
+      const option = document.createElement('option');
+      option.value = opt.value;
+      option.textContent = opt.label;
+      educationSelect.appendChild(option);
+    });
+  } else {
+    console.log('Adding single education options (130 points max)');
+    // No spouse: Maximum 130 points
+    const options = [
+      { value: 'secondaire-general', label: 'Secondaire général complété (13 points)' },
+      { value: 'secondaire-pro-600', label: 'Secondaire professionnel 600-899h (Québec) (13 points)' },
+      { value: 'secondaire-pro-900', label: 'Secondaire professionnel 900h+ (Québec) (26 points)' },
+      { value: 'secondaire-pro-1an', label: 'Secondaire professionnel 1 an+ (hors Québec) (26 points)' },
+      { value: 'postsecondaire-general', label: 'Postsecondaire général 2 ans (39 points)' },
+      { value: 'postsecondaire-tech-900', label: 'Postsecondaire technique 900h+ (Québec) (52 points)' },
+      { value: 'postsecondaire-tech-1-2', label: 'Postsecondaire technique 1-2 ans (hors Québec) (52 points)' },
+      { value: 'postsecondaire-tech-3', label: 'Postsecondaire technique 3 ans (78 points)' },
+      { value: 'universitaire-1-1', label: 'Universitaire 1er cycle 1 an (78 points)' },
+      { value: 'universitaire-1-2', label: 'Universitaire 1er cycle 2 ans (91 points)' },
+      { value: 'universitaire-1-3-4', label: 'Universitaire 1er cycle 3-4 ans (104 points)' },
+      { value: 'universitaire-1-5', label: 'Universitaire 1er cycle 5 ans+ (110 points)' },
+      { value: 'universitaire-2-1', label: 'Universitaire 2e cycle 1 an (110 points)' },
+      { value: 'universitaire-2-2', label: 'Universitaire 2e cycle 2 ans+ (117 points)' },
+      { value: 'universitaire-medical', label: 'Universitaire spécialisation médicale 2 ans+ (130 points)' },
+      { value: 'universitaire-3', label: 'Universitaire 3e cycle (130 points)' }
+    ];
+    options.forEach(opt => {
+      const option = document.createElement('option');
+      option.value = opt.value;
+      option.textContent = opt.label;
+      educationSelect.appendChild(option);
+    });
+  }
+  
+  // Restore previous value if possible
+  educationSelect.value = currentValue;
+  
+  console.log('Updated education select with', educationSelect.options.length, 'options');
+}
+
+
+
+function navigateToSection(sectionIndex) {
+  currentSection = sectionIndex;
+  updateSectionDisplay();
+  updateNavigation();
+  updateProgressBar();
+  
+  // Show form pages and hide results
+  document.getElementById('form-pages').style.display = 'block';
+  document.getElementById('results-page').style.display = 'none';
+  
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateSectionDisplay() {
+  // Hide all sections
+  document.querySelectorAll('.form-section').forEach(section => {
+    section.classList.remove('active');
+  });
+  
+  // Show current section
+  const currentSectionElement = document.getElementById(`section-${currentSection}`);
+  if (currentSectionElement) {
+    currentSectionElement.classList.add('active');
+  }
+  
+  // Update section header
+  const sectionIcon = document.getElementById('section-icon');
+  const sectionName = document.getElementById('section-name');
+  
+  if (sectionIcon && sectionName && sectionData[currentSection]) {
+    sectionIcon.textContent = sectionData[currentSection].icon;
+    sectionName.textContent = sectionData[currentSection].name;
+  }
+}
+
+function updateNavigation() {
+  // Update desktop navigation
+  document.querySelectorAll('.nav-button').forEach((button, index) => {
+    button.classList.remove('active');
+    if (parseInt(button.dataset.section) === currentSection) {
+      button.classList.add('active');
+    }
+  });
+  
+  // Update mobile navigation
+  document.querySelectorAll('.mobile-nav-button').forEach((button, index) => {
+    button.classList.remove('active');
+    if (parseInt(button.dataset.section) === currentSection) {
+      button.classList.add('active');
+    }
+  });
+  
+  // Update form navigation buttons
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const calculateBtn = document.getElementById('calculate-btn');
+  
+  if (prevBtn) prevBtn.disabled = currentSection === 0;
+  
+  if (currentSection === totalSections - 1) {
+    if (nextBtn) nextBtn.style.display = 'none';
+    if (calculateBtn) calculateBtn.style.display = 'flex';
+  } else {
+    if (nextBtn) nextBtn.style.display = 'flex';
+    if (calculateBtn) calculateBtn.style.display = 'none';
+  }
+}
+
+function updateProgressBar() {
+  const progressFill = document.getElementById('progress-fill');
+  const progressText = document.getElementById('progress-text');
+  
+  if (progressFill && progressText) {
+    const progress = ((currentSection + 1) / totalSections) * 100;
+    progressFill.style.width = `${progress}%`;
+    progressText.textContent = `Section ${currentSection + 1} sur ${totalSections}`;
+    
+    // Show lead capture at 50% completion
+    if (progress >= 50 && !localStorage.getItem('midwayLeadShown')) {
+      setTimeout(() => {
+        if (!localStorage.getItem('emailSubmitted')) {
+          showMidwayLeadCapture();
+          localStorage.setItem('midwayLeadShown', 'true');
+        }
+      }, 2000);
+    }
+  }
+}
+
+function showMidwayLeadCapture() {
+  const modal = document.getElementById('midway-lead-modal');
+  if (modal) {
+    modal.classList.add('show');
+  }
+}
+
+function hideMidwayLeadCapture() {
+  const modal = document.getElementById('midway-lead-modal');
+  if (modal) {
+    modal.classList.remove('show');
+  }
+}
+
+function handleMidwayLeadSubmit(e) {
+  e.preventDefault();
+  
+  const email = document.getElementById('midway-email-input').value;
+  const checkboxes = document.querySelectorAll('#midway-lead-form input[type="checkbox"]');
+
+  let allChecked = true;
+  checkboxes.forEach(checkbox => {
+    if (!checkbox.checked) {
+      allChecked = false;
+    }
+  });
+
+  if (!allChecked) {
+    alert('Veuillez accepter toutes les conditions pour continuer.');
+    return;
+  }
+
+  // Prepare data for webhook
+  const data = {
+    email: email,
+    consent_guide: checkboxes[0].checked,
+    consent_policy: checkboxes[1].checked,
+    source: 'midway_popup' // Add this to distinguish from main form
+  };
+
+  // Send data to webhook (same as main form)
+  fetch('https://hook.eu2.make.com/cvxlt8bumn11o3shf9ordtjy1f399r15', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => {
+    if (response.ok) {
+      // Store email submission
+      localStorage.setItem('emailSubmitted', 'true');
+      localStorage.setItem('userEmail', email);
+      
+      // Change button to success state
+      const submitButton = e.target.querySelector('.submit-button');
+      submitButton.textContent = '✅ Documents envoyés !';
+      submitButton.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+      submitButton.disabled = true;
+      
+      // Add success message below the form
+      const form = e.target;
+      const successMessage = document.createElement('div');
+      successMessage.className = 'success-message';
+      successMessage.innerHTML = `
+        <p style="color: #059669; font-weight: 600; margin: 16px 0 8px 0;">🎉 Merci ! Votre pack a été envoyé par email.</p>
+        <p style="color: #64748b; font-size: 14px; margin: 0;">💡 Pensez à vérifier votre dossier spam si vous ne voyez pas l'email dans votre boîte de réception.</p>
+      `;
+      
+      // Insert after the form
+      form.parentNode.insertBefore(successMessage, form.nextSibling);
+      
+      // Hide the form after a delay
+      setTimeout(() => {
+        hideMidwayLeadCapture();
+      }, 3000);
+    } else {
+      alert('Erreur lors de l\'envoi du formulaire. Veuillez réessayer.');
+    }
+  })
+  .catch(() => {
+    alert('Erreur lors de l\'envoi du formulaire. Veuillez réessayer.');
+  });
+}
+
+function handleEnhancedLeadSubmit(e) {
+  e.preventDefault();
+  
+  const email = document.getElementById('enhanced-email-input').value;
+  
+  // Store email submission
+  localStorage.setItem('emailSubmitted', 'true');
+  localStorage.setItem('userEmail', email);
+  
+  // Change button to success state
+  const submitButton = e.target.querySelector('.submit-button');
+  submitButton.textContent = '✅ Documents envoyés !';
+  submitButton.style.background = 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)';
+  submitButton.disabled = true;
+  
+  // Add success message below the form
+  const form = e.target;
+  const successMessage = document.createElement('div');
+  successMessage.className = 'success-message';
+  successMessage.innerHTML = `
+    <p style="color: #059669; font-weight: 600; margin: 16px 0 8px 0;">🎉 Merci ! Votre pack a été envoyé par email.</p>
+    <p style="color: #64748b; font-size: 14px; margin: 0;">💡 Pensez à vérifier votre dossier spam si vous ne voyez pas l'email dans votre boîte de réception.</p>
+  `;
+  
+  // Insert after the form
+  form.parentNode.insertBefore(successMessage, form.nextSibling);
+  
+  // Refresh the results display to show the "already subscribed" message
+  updateResultsDisplay();
+}
+
+function getFormValue(id) {
+  const element = document.getElementById(id);
+  if (!element) return '';
+  
+  if (element.type === 'radio') {
+    const checked = document.querySelector(`input[name="${element.name}"]:checked`);
+    return checked ? checked.value : '';
+  }
+  
+  return element.value;
+}
+
+function calculateScore() {
+  let totalScore = 0;
+  let breakdown = {};
+  
+  // Debug: Log which scoring tables are being used
+  console.log(`Calculating score with spouse: ${hasSpouse}`);
+  console.log(`Using scoring tables: ${hasSpouse ? 'WITH SPOUSE (3rd column)' : 'NO SPOUSE (2nd column)'}`);
+  
+  // Age - Uses Column 1 (no spouse) vs Column 2 (with spouse = 3rd column in PDF)
+  const age = getFormValue('age');
+  const ageScoreData = hasSpouse ? scoringData.ageWithSpouse : scoringData.age;
+  const ageScore = ageScoreData[age] || 0;
+  breakdown.age = ageScore;
+  totalScore += ageScore;
+  console.log(`Age: ${age} = ${ageScore} points (table: ${hasSpouse ? 'ageWithSpouse' : 'age'})`);
+  
+  // Spouse age - Additional points when spouse is present
+  if (hasSpouse) {
+    const spouseAge = getFormValue('spouseAge');
+    const spouseAgeScore = scoringData.spouseAge[spouseAge] || 0;
+    breakdown.spouseAge = spouseAgeScore;
+    totalScore += spouseAgeScore;
+    console.log(`Spouse age: ${spouseAge} = ${spouseAgeScore} points`);
+  }
+  
+  // French skills - Uses Column 1 (no spouse) vs Column 2 (with spouse = 3rd column in PDF)
+  const frenchScoreData = hasSpouse ? scoringData.frenchWithSpouse : scoringData.french;
+  const frenchOral = getFormValue('frenchOral');
+  const frenchOralProd = getFormValue('frenchOralProduction');
+  const frenchWritten = getFormValue('frenchWritten');
+  const frenchWrittenProd = getFormValue('frenchWrittenProduction');
+  
+  const frenchOralScore = frenchScoreData[frenchOral] || 0;
+  const frenchOralProdScore = frenchScoreData[frenchOralProd] || 0;
+  const frenchWrittenScore = frenchScoreData[frenchWritten] || 0;
+  const frenchWrittenProdScore = frenchScoreData[frenchWrittenProd] || 0;
+  
+  breakdown.frenchOral = frenchOralScore;
+  breakdown.frenchOralProd = frenchOralProdScore;
+  breakdown.frenchWritten = frenchWrittenScore;
+  breakdown.frenchWrittenProd = frenchWrittenProdScore;
+  breakdown.frenchTotal = frenchOralScore + frenchOralProdScore + frenchWrittenScore + frenchWrittenProdScore;
+  
+  totalScore += breakdown.frenchTotal;
+  console.log(`French skills: ${breakdown.frenchTotal} points (table: ${hasSpouse ? 'frenchWithSpouse' : 'french'})`);
+  
+  // Education - Uses Column 1 (no spouse) vs Column 2 (with spouse = 3rd column in PDF)
+  const education = getFormValue('education');
+  const educationScoreData = hasSpouse ? scoringData.educationWithSpouse : scoringData.education;
+  const educationScore = educationScoreData[education] || 0;
+  breakdown.education = educationScore;
+  totalScore += educationScore;
+  console.log(`Education: ${education} = ${educationScore} points (table: ${hasSpouse ? 'educationWithSpouse' : 'education'})`);
+  
+  // Work experience - Uses Column 1 (no spouse) vs Column 2 (with spouse = 3rd column in PDF)
+  const workExperience = getFormValue('workExperience');
+  const workScoreData = hasSpouse ? scoringData.workExperienceWithSpouse : scoringData.workExperience;
+  const workExperienceScore = workScoreData[workExperience] || 0;
+  breakdown.workExperience = workExperienceScore;
+  totalScore += workExperienceScore;
+  console.log(`Work experience: ${workExperience} = ${workExperienceScore} points (table: ${hasSpouse ? 'workExperienceWithSpouse' : 'workExperience'})`);
+  
+  // Quebec diploma - Uses Column 1 (no spouse) vs Column 2 (with spouse = 3rd column in PDF)
+  const quebecDiploma = getFormValue('quebecDiploma');
+  const quebecDiplomaScore = scoringData.quebecDiploma[quebecDiploma] || 0;
+  breakdown.quebecDiploma = quebecDiplomaScore;
+  totalScore += quebecDiplomaScore;
+  console.log(`Quebec diploma: ${quebecDiploma} = ${quebecDiplomaScore} points`);
+  
+  // Quebec work experience - Uses Column 1 (no spouse) vs Column 2 (with spouse = 3rd column in PDF)
+  const quebecWorkExperience = getFormValue('quebecWorkExperience');
+  const quebecWorkScore = scoringData.quebecWorkExperience[quebecWorkExperience] || 0;
+  breakdown.quebecWork = quebecWorkScore;
+  totalScore += quebecWorkScore;
+  console.log(`Quebec work experience: ${quebecWorkExperience} = ${quebecWorkScore} points`);
+  
+  // Job offer - Same scoring for both (no spouse adjustment)
+  const jobOffer = getFormValue('jobOffer');
+  const jobOfferScore = scoringData.jobOffer[jobOffer] || 0;
+  breakdown.jobOffer = jobOfferScore;
+  totalScore += jobOfferScore;
+  console.log(`Job offer: ${jobOffer} = ${jobOfferScore} points`);
+  
+  // Profession - Same scoring for both (no spouse adjustment)
+  const profession = getFormValue('profession');
+  const professionScore = scoringData.profession[profession] || 0;
+  breakdown.profession = professionScore;
+  totalScore += professionScore;
+  console.log(`Profession: ${profession} = ${professionScore} points`);
+  
+  // Profession experience - Same scoring for both (no spouse adjustment)
+  const professionExperience = getFormValue('professionExperience');
+  const professionExperienceScore = scoringData.professionExperience[professionExperience] || 0;
+  breakdown.professionExperience = professionExperienceScore;
+  totalScore += professionExperienceScore;
+  console.log(`Profession experience: ${professionExperience} = ${professionExperienceScore} points`);
+  
+  // Professional authorization - Same scoring for both (no spouse adjustment)
+  const professionalAuthorization = getFormValue('professionalAuthorization');
+  const professionalAuthorizationScore = scoringData.professionalAuthorization[professionalAuthorization] || 0;
+  breakdown.professionalAuthorization = professionalAuthorizationScore;
+  totalScore += professionalAuthorizationScore;
+  console.log(`Professional authorization: ${professionalAuthorization} = ${professionalAuthorizationScore} points`);
+  
+  // Quebec study duration - Same scoring for both (no spouse adjustment)
+  const quebecStudyDuration = getFormValue('quebecStudyDuration');
+  const quebecStudyDurationScore = scoringData.quebecStudyDuration[quebecStudyDuration] || 0;
+  breakdown.quebecStudyDuration = quebecStudyDurationScore;
+  totalScore += quebecStudyDurationScore;
+  console.log(`Quebec study duration: ${quebecStudyDuration} = ${quebecStudyDurationScore} points`);
+  
+  // Outside Montreal - Same scoring for both (no spouse adjustment)
+  const outsideMontreal = getFormValue('outsideMontreal');
+  const outsideMontrealScore = scoringData.outsideMontreal[outsideMontreal] || 0;
+  breakdown.outsideMontreal = outsideMontrealScore;
+  totalScore += outsideMontrealScore;
+  console.log(`Outside Montreal: ${outsideMontreal} = ${outsideMontrealScore} points`);
+  
+  // Family member - Same scoring for both (no spouse adjustment)
+  const familyMember = getFormValue('familyMember');
+  const familyScore = scoringData.familyMember[familyMember] || 0;
+  breakdown.family = familyScore;
+  totalScore += familyScore;
+  console.log(`Family member: ${familyMember} = ${familyScore} points`);
+  
+  // Spouse factors - Additional points when spouse is present
+  if (hasSpouse) {
+    // Spouse French
+    const spouseFrenchOral = getFormValue('spouseFrenchOral');
+    const spouseFrenchOralProd = getFormValue('spouseFrenchOralProduction');
+    const spouseFrenchWritten = getFormValue('spouseFrenchWritten');
+    const spouseFrenchWrittenProd = getFormValue('spouseFrenchWrittenProduction');
+    const spouseFrenchScores = [
+      scoringData.spouseFrench[spouseFrenchOral] || 0,
+      scoringData.spouseFrench[spouseFrenchOralProd] || 0,
+      scoringData.spouseFrench[spouseFrenchWritten] || 0,
+      scoringData.spouseFrench[spouseFrenchWrittenProd] || 0
+    ];
+    const spouseFrenchScore = Math.max(...spouseFrenchScores);
+    breakdown.spouseFrench = spouseFrenchScore;
+    totalScore += spouseFrenchScore;
+    console.log(`Spouse French: ${spouseFrenchScore} points`);
+    
+    // Spouse education
+    const spouseEducation = getFormValue('spouseEducation');
+    const spouseEducationScore = scoringData.spouseEducation[spouseEducation] || 0;
+    breakdown.spouseEducation = spouseEducationScore;
+    totalScore += spouseEducationScore;
+    console.log(`Spouse education: ${spouseEducation} = ${spouseEducationScore} points`);
+    
+    // Spouse Quebec diploma
+    const spouseQuebecDiploma = getFormValue('spouseQuebecDiploma');
+    const spouseQuebecDiplomaScore = scoringData.spouseQuebecDiploma[spouseQuebecDiploma] || 0;
+    breakdown.spouseQuebecDiploma = spouseQuebecDiplomaScore;
+    totalScore += spouseQuebecDiplomaScore;
+    console.log(`Spouse Quebec diploma: ${spouseQuebecDiploma} = ${spouseQuebecDiplomaScore} points`);
+    
+    // Spouse Quebec work
+    const spouseQuebecWork = getFormValue('spouseQuebecWork');
+    const spouseQuebecWorkScore = scoringData.spouseQuebecWork[spouseQuebecWork] || 0;
+    breakdown.spouseQuebecWork = spouseQuebecWorkScore;
+    totalScore += spouseQuebecWorkScore;
+    console.log(`Spouse Quebec work: ${spouseQuebecWork} = ${spouseQuebecWorkScore} points`);
+  }
+  
+  // Store results
+  calculatorResults = {
+    totalScore: totalScore,
+    breakdown: breakdown,
+    hasSpouse: hasSpouse
+  };
+  
+  console.log(`Total score: ${totalScore} points`);
+  return totalScore;
+}
+
+function calculateAndShowResults() {
+  calculateScore();
+  showResults();
+}
+
+function showResults() {
+  // Hide form pages and show results
+  document.getElementById('form-pages').style.display = 'none';
+  document.getElementById('results-page').style.display = 'block';
+  
+  // Update navigation to show results as active
+  document.querySelectorAll('.nav-button, .mobile-nav-button').forEach(button => {
+    button.classList.remove('active');
+    if (button.dataset.section === 'results') {
+      button.classList.add('active');
+    }
+  });
+  
+  // Update results display
+  updateResultsDisplay();
+  
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateResultsDisplay() {
+  if (!calculatorResults) {
+    calculateScore();
+  }
+  
+  const results = calculatorResults;
+  const breakdown = results.breakdown;
+  
+  // Update total score
+  const totalScoreElement = document.getElementById('total-score');
+  if (totalScoreElement) {
+    totalScoreElement.textContent = `${results.totalScore} points`;
+  }
+  
+  // Update breakdown
+  const updateElement = (id, value) => {
+    const element = document.getElementById(id);
+    if (element) element.textContent = `${value || 0} pts`;
+  };
+  
+  updateElement('french-oral', breakdown.frenchOral);
+  updateElement('french-oral-prod', breakdown.frenchOralProd);
+  updateElement('french-written', breakdown.frenchWritten);
+  updateElement('french-written-prod', breakdown.frenchWrittenProd);
+  updateElement('french-total', breakdown.frenchTotal);
+  
+  updateElement('quebec-diploma', breakdown.quebecDiploma);
+  updateElement('quebec-work', breakdown.quebecWork);
+  
+  updateElement('age-score', breakdown.age);
+  updateElement('education-score', breakdown.education);
+  updateElement('work-experience-score', breakdown.workExperience);
+  
+  updateElement('job-offer-score', breakdown.jobOffer);
+  updateElement('profession-score', breakdown.profession);
+  updateElement('profession-experience-score', breakdown.professionExperience);
+  updateElement('authorization-score', breakdown.professionalAuthorization);
+  updateElement('study-score', breakdown.quebecStudyDuration);
+  updateElement('outside-montreal-score', breakdown.outsideMontreal);
+  updateElement('family-score', breakdown.family);
+  
+  // Update spouse breakdown
+  const spouseBreakdown = document.getElementById('spouse-breakdown');
+  if (spouseBreakdown) {
+    if (results.hasSpouse) {
+      spouseBreakdown.style.display = 'block';
+      updateElement('spouse-french-score', breakdown.spouseFrench);
+      updateElement('spouse-age-score', breakdown.spouseAge);
+      updateElement('spouse-quebec-work-score', breakdown.spouseQuebecWork);
+      updateElement('spouse-education-score', breakdown.spouseEducation);
+      updateElement('spouse-quebec-diploma-score', breakdown.spouseQuebecDiploma);
+    } else {
+      spouseBreakdown.style.display = 'none';
+    }
+  }
+}
+
+function downloadResults() {
+  if (!calculatorResults) {
+    alert('Veuillez d\'abord calculer votre score.');
+    return;
+  }
+  
+  // Find the results container to capture
+  const resultsContainer = document.querySelector('.results-container');
+  if (!resultsContainer) {
+    alert('Impossible de trouver les résultats à télécharger.');
+    return;
+  }
+  
+  // Show loading message
+  const downloadBtn = document.getElementById('download-results');
+  const originalText = downloadBtn.textContent;
+  downloadBtn.textContent = '📸 Capture en cours...';
+  downloadBtn.disabled = true;
+  
+  // Use html2canvas to capture the results as an image
+  if (typeof html2canvas !== 'undefined') {
+    html2canvas(resultsContainer, {
+      scale: 2, // Higher quality
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: '#ffffff',
+      width: resultsContainer.offsetWidth,
+      height: resultsContainer.offsetHeight
+    }).then(canvas => {
+      // Convert canvas to blob and download
+      canvas.toBlob(function(blob) {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `resultats-arrima-${new Date().toISOString().split('T')[0]}.png`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+        
+        // Reset button
+        downloadBtn.textContent = originalText;
+        downloadBtn.disabled = false;
+      }, 'image/png');
+    }).catch(error => {
+      console.error('Screenshot capture failed:', error);
+      alert('Erreur lors de la capture d\'écran. Tentative de téléchargement en format texte...');
+      
+      // Fallback to text download
+      downloadResultsAsText();
+      
+      // Reset button
+      downloadBtn.textContent = originalText;
+      downloadBtn.disabled = false;
+    });
+  } else {
+    // Fallback to text download if html2canvas is not available
+    alert('Fonctionnalité de capture d\'écran non disponible. Téléchargement en format texte...');
+    downloadResultsAsText();
+    
+    // Reset button
+    downloadBtn.textContent = originalText;
+    downloadBtn.disabled = false;
+  }
+}
+
+// Fallback function for text download
+function downloadResultsAsText() {
+  const results = calculatorResults;
+  const breakdown = results.breakdown;
+  
+  // Create downloadable content
+  let content = `RÉSULTATS DU CALCULATEUR ARRIMA PSTQ 2025\n`;
+  content += `===========================================\n\n`;
+  content += `Score total: ${results.totalScore} points sur 1600\n\n`;
+  
+  content += `DÉTAIL DES POINTS:\n\n`;
+  
+  content += `Compétences linguistiques (Français):\n`;
+  content += `- Compréhension orale: ${breakdown.frenchOral || 0} pts\n`;
+  content += `- Production orale: ${breakdown.frenchOralProd || 0} pts\n`;
+  content += `- Compréhension écrite: ${breakdown.frenchWritten || 0} pts\n`;
+  content += `- Production écrite: ${breakdown.frenchWrittenProd || 0} pts\n`;
+  content += `- Sous-total français: ${breakdown.frenchTotal || 0} pts\n`;
+  
+  content += `Facteurs Québec:\n`;
+  content += `- Diplôme du Québec: ${breakdown.quebecDiploma || 0} pts\n`;
+  content += `- Expérience de travail au Québec: ${breakdown.quebecWork || 0} pts\n\n`;
+  
+  content += `Capital humain:\n`;
+  content += `- Âge: ${breakdown.age || 0} pts\n`;
+  content += `- Niveau de scolarité: ${breakdown.education || 0} pts\n`;
+  content += `- Expérience de travail: ${breakdown.workExperience || 0} pts\n\n`;
+  
+  content += `Facteurs additionnels:\n`;
+  content += `- Offre d'emploi: ${breakdown.jobOffer || 0} pts\n`;
+  content += `- Profession (diagnostic main-d'œuvre): ${breakdown.profession || 0} pts\n`;
+  content += `- Expérience dans la profession: ${breakdown.professionExperience || 0} pts\n`;
+  content += `- Autorisation professionnelle: ${breakdown.professionalAuthorization || 0} pts\n`;
+  content += `- Études au Québec (sans diplôme): ${breakdown.quebecStudyDuration || 0} pts\n`;
+  content += `- Séjour hors Montréal: ${breakdown.outsideMontreal || 0} pts\n`;
+  content += `- Famille proche au Québec: ${breakdown.family || 0} pts\n\n`;
+  
+  if (results.hasSpouse) {
+    content += `Facteurs conjoint:\n`;
+    content += `- Français conjoint: ${breakdown.spouseFrench || 0} pts\n`;
+    content += `- Âge conjoint: ${breakdown.spouseAge || 0} pts\n`;
+    content += `- Expérience conjoint: ${breakdown.spouseQuebecWork || 0} pts\n`;
+    content += `- Scolarité conjoint: ${breakdown.spouseEducation || 0} pts\n`;
+    content += `- Diplôme QC conjoint: ${breakdown.spouseQuebecDiploma || 0} pts\n\n`;
+  }
+  
+  content += `\nCe simulateur est basé sur la grille officielle mise à jour le 2 juillet 2025.\n`;
+  content += `Il s'agit d'une estimation. Pour les informations officielles, consultez le MIFI.\n`;
+  content += `\nGénéré par le Calculateur Arrima PSTQ - J'arrive Québec`;
+  
+  // Create and download file
+  const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `resultats-arrima-${new Date().toISOString().split('T')[0]}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  window.URL.revokeObjectURL(url);
+}
+
+
+
+function handleEmailSubmit(e) {
+  e.preventDefault();
+
+  const email = document.getElementById('email-input').value;
+  const checkboxes = document.querySelectorAll('#email-form input[type="checkbox"]');
+
+  let allChecked = true;
+  checkboxes.forEach(checkbox => {
+    if (!checkbox.checked) {
+      allChecked = false;
+    }
+  });
+
+  if (!allChecked) {
+    alert('Veuillez accepter toutes les conditions pour continuer.');
+    return;
+  }
+
+  // Prepare data for webhook
+  const data = {
+    email: email,
+    consent_guide: checkboxes[0].checked,
+    consent_policy: checkboxes[1].checked
+  };
+
+  // Send data to webhook
+  fetch('https://hook.eu2.make.com/cvxlt8bumn11o3shf9ordtjy1f399r15', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => {
+    if (response.ok) {
+      // Change button to success state
+      const submitButton = e.target.querySelector('.submit-button');
+      submitButton.textContent = '✅ Documents envoyés !';
+      submitButton.style.background = 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)';
+      submitButton.disabled = true;
+      
+      // Add success message below the form
+      const form = e.target;
+      const successMessage = document.createElement('div');
+      successMessage.className = 'success-message';
+      successMessage.innerHTML = `
+        <p style="color: #059669; font-weight: 600; margin: 16px 0 8px 0;">🎉 Merci ! Votre pack a été envoyé par email.</p>
+        <p style="color: #64748b; font-size: 14px; margin: 0;">💡 Pensez à vérifier votre dossier spam si vous ne voyez pas l'email dans votre boîte de réception.</p>
+      `;
+      
+      // Insert after the form
+      form.parentNode.insertBefore(successMessage, form.nextSibling);
+      
+      // Mark email as submitted to prevent exit intent popup
+      localStorage.setItem('emailSubmitted', 'true');
+    } else {
+      alert('Erreur lors de l\'envoi du formulaire. Veuillez réessayer.');
+    }
+  })
+  .catch(() => {
+    alert('Erreur lors de l\'envoi du formulaire. Veuillez réessayer.');
+  });
+}
+
+// Exit Intent Popup Functions
+function showExitIntentPopup() {
+  // Check if email was already submitted
+  if (localStorage.getItem('emailSubmitted') === 'true') {
+    return;
+  }
+  
+  document.getElementById('exit-intent-popup').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function hideExitIntentPopup() {
+  document.getElementById('exit-intent-popup').style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+// Function to reset popup state for testing or when needed
+function resetExitIntentPopup() {
+  localStorage.removeItem('emailSubmitted');
+  // Reset popup state variables
+  if (typeof initializeExitIntent === 'function') {
+    // Re-initialize exit intent
+    initializeExitIntent();
+  }
+}
+
+function handleExitIntentChoice(choice) {
+  if (choice === 'yes') {
+    // Show the bundle form
+    document.getElementById('exit-intent-content').style.display = 'none';
+    document.getElementById('exit-intent-form').style.display = 'block';
+  } else {
+    // Close popup
+    hideExitIntentPopup();
+  }
+}
+
+function handleBundleEmailSubmit(e) {
+  e.preventDefault();
+
+  const email = document.getElementById('bundle-email-input').value;
+  const checkboxes = document.querySelectorAll('#bundle-email-form input[type="checkbox"]');
+
+  let allChecked = true;
+  checkboxes.forEach(checkbox => {
+    if (!checkbox.checked) {
+      allChecked = false;
+    }
+  });
+
+  if (!allChecked) {
+    alert('Veuillez accepter toutes les conditions pour continuer.');
+    return;
+  }
+
+  // Mark email as submitted
+  localStorage.setItem('emailSubmitted', 'true');
+  
+  // Download both documents
+  downloadBundleDocuments();
+  
+  // Close popup
+  hideExitIntentPopup();
+  
+  // Reset form
+  document.getElementById('bundle-email-form').reset();
+  
+  // Download completed - no alert needed
+}
+
+function downloadBundleDocuments() {
+  try {
+    // Download first document - Guide des Documents Essentiels
+    const link1 = document.createElement('a');
+    link1.href = 'https://cdn.prod.website-files.com/681220773670b14061a4d1d1/686d26b345311108bbb57432_Guide%20des%20Documents%20Essentiels_JarriveQuebec.pdf';
+    link1.download = 'Guide_des_Documents_Essentiels_JarriveQuebec.pdf';
+    link1.target = '_blank';
+    link1.style.display = 'none';
+    document.body.appendChild(link1);
+    link1.click();
+    document.body.removeChild(link1);
+    
+    // Small delay to ensure first download starts
+    setTimeout(() => {
+      // Download second document - Objectif Emploi
+      const link2 = document.createElement('a');
+      link2.href = 'https://cdn.prod.website-files.com/681220773670b14061a4d1d1/68980468dd99b37c6c631eef_Objectif%20Emploi%20_%20Guide%20pour%20Trouver%20une%20Offre%20d%27emploi%20Validée%20au%20Québec.pdf';
+      link2.download = 'Objectif_Emploi_Guide_Emploi_Quebec.pdf';
+      link2.target = '_blank';
+      link2.style.display = 'none';
+      document.body.appendChild(link2);
+      link2.click();
+      document.body.removeChild(link2);
+    }, 500);
+    
+  } catch (error) {
+    console.error('Download error:', error);
+    // Fallback: try to download both files if the main method fails
+    try {
+      const link1 = document.createElement('a');
+      link1.href = 'https://cdn.prod.website-files.com/681220773670b14061a4d1d1/686d26b345311108bbb57432_Guide%20des%20Documents%20Essentiels_JarriveQuebec.pdf';
+      link1.download = 'Guide_des_Documents_Essentiels_JarriveQuebec.pdf';
+      link1.target = '_blank';
+      link1.click();
+      
+      setTimeout(() => {
+        const link2 = document.createElement('a');
+        link2.href = 'https://cdn.prod.website-files.com/681220773670b14061a4d1d1/68980468dd99b37c6c631eef_Objectif%20Emploi%20_%20Guide%20pour%20Trouver%20une%20Offre%20d%27emploi%20Validée%20au%20Québec.pdf';
+        link2.download = 'Objectif_Emploi_Guide_Emploi_Quebec.pdf';
+        link2.target = '_blank';
+        link2.click();
+      }, 500);
+    } catch (fallbackError) {
+      console.error('Fallback download also failed:', fallbackError);
+    }
+  }
+}
+
+// Floating Lead Bar Functions - REMOVED
+
+
+
+
+// Exit Intent Popup - REMOVED
+</script>
+
+<!-- Exit Intent Popup - REMOVED -->
+
+<!-- Floating Lead Magnet Bar - REMOVED -->
+
+<!-- Midway Lead Capture Modal -->
+<div id="midway-lead-modal" class="midway-lead-modal">
+  <div class="midway-lead-modal-content">
+    <button class="midway-lead-close" onclick="hideMidwayLeadCapture()">&times;</button>
+    <div class="midway-lead-modal-header">
+      <h3>🎯 Vous êtes à mi-chemin !</h3>
+      <p>Continuez votre évaluation et recevez en bonus :</p>
+      <ul>
+        <li>✅ Votre score Arrima complet</li>
+        <li>📋 Guide des Documents Essentiels</li>
+        <li>🎯 Guide Objectif Emploi Québec</li>
+      </ul>
+    </div>
+    
+    <form id="midway-lead-form" class="midway-lead-form" onsubmit="handleMidwayLeadSubmit(event)">
+      <div class="form-group">
+        <label for="midway-email-input" class="form-label">Votre email *</label>
+        <input type="email" id="midway-email-input" class="form-input" placeholder="votre@email.com" required>
+      </div>
+      
+      <div class="checkbox-group">
+        <label class="checkbox-label">
+          <input type="checkbox" required class="checkbox-input">
+          <span class="checkbox-text">Je veux recevoir le guide et j'accepte de recevoir les communications de J'arrive Québec. Je peux me désinscrire à tout moment.</span>
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" required class="checkbox-input">
+          <span class="checkbox-text">J'ai lu et j'accepte la <a href="#" class="link">Politique de Confidentialité</a> et les <a href="#" class="link">Conditions Générales d'Utilisation</a>.</span>
+        </label>
+      </div>
+      
+      <button type="submit" class="submit-button">📧 Recevoir mon pack par e-mail</button>
+    </form>
+  </div>
+</div>
+
+<!-- Floating Lead Form Modal -->
+<!-- Floating Lead Form Modal - REMOVED -->
+
+
+
+<!-- iframe-resizer script removed to prevent embedded page URL display issues -->
+</body>
+</html>
